@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -31,32 +22,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeDocumentMoniker": "AmoElDiseno\\Program.cs",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeToolTip": "AmoElDiseno\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T14:29:46.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "AmoElDiseno\\Models\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\AppDbContext.cs",
-              "RelativeToolTip": "AmoElDiseno\\Models\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T14:07:17.273Z",
-              "EditorCaption": ""
             }
           ]
         }

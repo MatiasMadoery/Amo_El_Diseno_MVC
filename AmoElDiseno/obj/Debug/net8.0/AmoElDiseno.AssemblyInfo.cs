@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70fa96b9fce8da0722cab720fa5348653f4a84ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3dc84db68c21b1af7176bc44c309a1fa2a413587")]
 [assembly: System.Reflection.AssemblyProductAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using AmoElDiseno.Models;
 
 namespace AmoElDiseno.Models
 {
@@ -6,8 +7,6 @@ namespace AmoElDiseno.Models
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public class BusinessContext : DbContext
-        {
             public DbSet<Customer>? Customers { get; set; }
             public DbSet<Order>? Orders { get; set; }
             public DbSet<Income>? Incomes { get; set; }
@@ -25,7 +24,12 @@ namespace AmoElDiseno.Models
                     .Property(o => o.Status)
                     .HasConversion<string>();
             }
-        }
+        
+        public DbSet<AmoElDiseno.Models.Customer> Customer { get; set; } = default!;
+        public DbSet<AmoElDiseno.Models.Expense> Expense { get; set; } = default!;
+        public DbSet<AmoElDiseno.Models.Income> Income { get; set; } = default!;
+        public DbSet<AmoElDiseno.Models.Order> Order { get; set; } = default!;
+        public DbSet<AmoElDiseno.Models.User> User { get; set; } = default!;
 
     }
 }

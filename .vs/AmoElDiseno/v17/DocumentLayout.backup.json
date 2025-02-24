@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,28 +34,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeDocumentMoniker": "AmoElDiseno\\Program.cs",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeToolTip": "AmoElDiseno\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T14:29:46.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\AppDbContext.cs",
               "RelativeDocumentMoniker": "AmoElDiseno\\Models\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\AppDbContext.cs",
               "RelativeToolTip": "AmoElDiseno\\Models\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T14:07:17.273Z",
+              "WhenOpened": "2025-02-24T15:27:14.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
+              "RelativeDocumentMoniker": "AmoElDiseno\\Program.cs",
+              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
+              "RelativeToolTip": "AmoElDiseno\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-24T15:26:47.974Z",
               "EditorCaption": ""
             }
           ]
