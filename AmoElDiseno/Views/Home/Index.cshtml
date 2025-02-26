@@ -1,8 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amo el diseño</title>
+    <link rel="stylesheet" href="~/css/web.css">    
+</head>
+<body> 
+    <div class="intro">
+        <section id="inicio">
+            <h2>Bienvenido!</h2>
+            <p>Diseñamos y confeccionamos ropa a tu medida.</p>
+        </section>
+        <section class="banner"></section>        
+    </div>
+    <hr>
+    <div id="nuestrosProductos">
+        <h1 id="nuestrosProductos">Nuestros productos</h1>
+    </div>
+    <div class="contenedor" id="contenedor">
+        <section>
+            <h1 id="egresados">Egresados</h1>
+            <article>
+                <div class="imagenes">
+                    <img src="img/egresados.png" alt="Remera egresado">
+                </div>
+                <p>Conoce todas nuestras opciones en prendas de egresados para que te destaques en cada ocasión.</p>
+                <a href="/trabajoFinalLabo3/seccion/productos/egresados.html">Ver mas</a>
+            </article>
+        </section>
+        <section>
+            <h1 id="deportiva">Deportivo</h1>
+            <article>
+                <div class="imagenes">
+                    <img src="img/deportivo.png" alt="Remera deportiva">
+                </div>
+                <p>Descubre nuestra colección de indumentaria deportiva para todas tus actividades físicas.</p>
+                <a href="/trabajoFinalLabo3/seccion/productos/deportivo.html">Ver mas</a>
+            </article>
+        </section>
+        <section>
+            <h1 id="corporativa">Institucional</h1>
+            <article>
+                <div class="imagenes">
+                    <img src="img/institucional.png" alt="Remera institucional">
+                </div>
+                <p>Creamos las prendas ideales para que tu institucion resalte su identidad en todo momento.</p>
+                <a href="/trabajoFinalLabo3/seccion/productos/institucional.html">Ver mas</a>
+            </article>
+        </section>
+    </div>
+    <div class="logo2">
+        <img id="logo2" src="img/amoElDisenioBlanco.png" alt="Logo">
+    </div>
+    <div class="iconosInfo">
+        <section class="seccionIcono">
+            <img src="img/camion.png" alt="Icono envios">
+            <h4>ENVIOS A TODO EL PAIS</h4>
+            <P>En compras supreriores a $110.000</P>
+        </section>
+        <section class="seccionIcono">
+            <img src="img/carrito.png" alt="Icono compra segura">
+            <h4>COMPRA 100% SEGURA</h4>
+            <P>Tu informacion protegida y garantizada</P>
+        </section>
+        <section class="seccionIcono">
+            <img src="img/mediosPago.png" alt="Icono medios de pago">
+            <h4>TODOS LOS MEDIOS DE PAGO</h4>
+            <P>Consulta las promociones y descuentos</P>
+        </section>
+    </div>
+    <script src="../js/footer.js"></script>
+</body>
+</html> 

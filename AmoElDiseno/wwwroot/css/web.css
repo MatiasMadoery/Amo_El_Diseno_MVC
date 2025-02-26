@@ -1,0 +1,328 @@
+﻿body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+
+/*-----Pagina  principal-----*/
+
+/*body*/
+.banner {
+    border: 1px solid black;
+    background-image: url(../img/banner.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    height: 100px;
+    margin-bottom: 25px;
+}
+
+#nuestrosProductos {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contenedor {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+section h1 {
+    text-align: left;
+}
+
+article {
+    display: block;
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin-bottom: 100px;
+}
+
+.nosotros article {
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin: 50px;
+}
+
+article p {
+    text-align: center;
+    padding: 0px 10px;
+}
+
+.imagenes {
+    margin: auto;
+    max-width: 400px;
+    max-height: 300px;
+}
+
+article a {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin-bottom: 15px;
+    transition: all 0.25s;
+}
+
+    article a:hover {
+        background-color: rgb(24, 13, 105);
+        color: white;
+    }
+
+.logo2 {
+    width: 300px;
+    height: 110px;
+    margin-top: -20px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 100px;
+    border-radius: 100px;
+    padding: 20px;
+    background-image: url(../img/banner.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+#logo2 {
+    width: 110px;
+    float: left;
+}
+
+.iconosInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin-left: 250px;
+    margin-bottom: 30px;
+}
+
+.seccionIcono {
+    width: 350px;
+    text-align: center;
+    margin: 80px;
+}
+
+    .seccionIcono img {
+        width: 100px;
+        aspect-ratio: 1/1;
+    }
+
+/*-----footer-----*/
+footer {
+    background-image: url(../img/fondoTrama.png);
+    background-size: cover;
+    padding: 20px 0;
+    text-align: center;
+    margin: 0px;
+}
+
+.contacto-redes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto 25px auto;
+    padding: 0 10px;
+    color: white;
+}
+
+#contacto, #redes {
+    flex: 1;
+    margin: -20px 10px;
+}
+
+    #contacto h4, #redes h4 {
+        margin-bottom: 10px;
+        color: #777;
+    }
+
+    #redes ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    #redes li {
+        margin-bottom: 15px;
+        display: block;
+        align-items: center;
+    }
+
+#iconoRedes {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+
+#logoFooter {
+    display: block;
+    margin: 0 auto 10px auto;
+    margin-top: 30px;
+}
+
+.logoFooter {
+    width: 50px;
+}
+
+#pFooter, #pFooter2 {
+    font-size: 12px;
+    color: #777;
+    margin: 0;
+}
+
+
+/*-----Pagina Nosotros-----*/
+
+/*body*/
+
+.nosotros h2 {
+    color: white;
+    background-color: rgb(24, 13, 105);
+    border-radius: 5px;
+}
+
+
+/*-----MediaQuery-----*/
+
+/* mediaQuery para celulares */
+@media (max-width: 767px) {
+
+    .logo {
+        margin-top: 35px;
+    }
+
+    #logo {
+        max-width: 120px;
+    }
+
+    #navHeader {
+        display: none;
+    }
+
+    .menuHambur {
+        margin-top: 60px;
+        display: block;
+    }
+
+    .contenedor {
+        display: block;
+        margin: 0 10px;
+    }
+
+    .iconosInfo {
+        display: inline-block;
+        margin: 0;
+        align-items: center;
+    }
+
+    .seccionIcono {
+        margin: 50px 0px;
+    }
+
+
+    #contacto, #redes {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .contacto-redes {
+        display: block;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .logoFooter {
+        width: 40px;
+    }
+
+    .formularioAdmin {
+        margin-left: -25px;
+        margin-top: -200px;
+    }
+
+    .contenedorAbm {
+        display: block;
+        max-width: 300px;
+    }
+}
+
+/* mediaQuery para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    #navHeader {
+        display: block;
+        text-align: center;
+    }
+
+    .contenedor {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+        margin: 0 20px;
+    }
+
+    .iconosInfo {
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .seccionIcono {
+        margin: 40px;
+    }
+
+    .contacto-redes {
+        flex-direction: column;
+    }
+
+    #contacto, #redes {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+        #redes ul {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 0px;
+        }
+}
+
+/* mediaQuery para monitores */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .contenedor {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 0 30px;
+    }
+
+    .iconosInfo {
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    .seccionIcono {
+        margin: 60px;
+    }
+}
+
+/* mediaQuery para grandes pantallas */
+@media (min-width: 1367px) {
+    .contenedor {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin: 0 50px;
+    }
+
+    .iconosInfo {
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    .seccionIcono {
+        margin: 80px;
+    }
+}

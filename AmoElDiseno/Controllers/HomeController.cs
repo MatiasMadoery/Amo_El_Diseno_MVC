@@ -18,6 +18,26 @@ namespace AmoElDiseno.Controllers
             return View();
         }
 
+        public IActionResult Nosotros()
+        {
+            return View();
+        }
+
+        public IActionResult Deportivo()
+        {
+            return View();
+        }
+
+        public IActionResult Egresados()
+        {
+            return View();
+        }
+
+        public IActionResult Institucional()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
