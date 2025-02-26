@@ -20,6 +20,6 @@ namespace AmoElDiseno.Models
 
 
         //Relation with Order
-        public ICollection<Order> Orders { get; set; }  
+        public ICollection<Order>? Orders { get; set; }  
     }
 }

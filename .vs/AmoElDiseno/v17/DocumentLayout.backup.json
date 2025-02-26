@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,27 +31,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "AmoElDiseno\\Models\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\AppDbContext.cs",
-              "RelativeToolTip": "AmoElDiseno\\Models\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAIAAAAAAAAAA==",
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "AmoElDiseno\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\Order.cs",
+              "RelativeToolTip": "AmoElDiseno\\Models\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T15:27:14.837Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeDocumentMoniker": "AmoElDiseno\\Program.cs",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeToolTip": "AmoElDiseno\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T15:26:47.974Z",
+              "WhenOpened": "2025-02-24T15:34:13.579Z",
               "EditorCaption": ""
             }
           ]
