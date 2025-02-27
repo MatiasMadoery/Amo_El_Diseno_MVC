@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+
 [assembly: System.Reflection.AssemblyCompanyAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f2015b9b01c48345ecf3adbcec458a5864bb1e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4158b0aba277b99f7d45cfa3971d9183e5bed114")]
 [assembly: System.Reflection.AssemblyProductAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

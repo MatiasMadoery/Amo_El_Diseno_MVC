@@ -21,7 +21,16 @@ body {
   margin-bottom: 60px;
 }
 
+.nav-item-right {
+    margin-left: auto;
+}
 
+.icono-sesion {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
 
 
 
