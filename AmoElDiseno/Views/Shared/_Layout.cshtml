@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AmoElDiseno</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />   
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
 </head>
 <body>
@@ -30,8 +30,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="logout" asp-controller="Users" asp-action="Logout">Cerrar Sesión</a>
+                            <li class="nav-item nav-item-right">
+                                <a class="nav-link" id="logout" asp-controller="UsersLogin" asp-action="Logout">
+                                    <img src="../img/user-solid.svg" alt="Logo" class="icono-sesion">
+                                    Cerrar Sesión
+                                </a>
                             </li>
                         }
                         else
@@ -47,7 +50,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Institucional">Institucional</a>
-                            </li>
+                            </li>                          
                             <li class="nav-item nav-item-right">
                                 <a class="nav-link" id="icono-sesion" asp-controller="UsersLogin" asp-action="Login">
                                     <img src="../img/user-solid.svg" alt="Logo" class="icono-sesion">
