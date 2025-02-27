@@ -27,7 +27,7 @@ namespace AmoElDiseno.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string nombreUsuario, string contrasena)
         {
-            var usuario = _context.User!.FirstOrDefault(u => u.UserName == nombreUsuario && u.Password == contrasena);
+            var usuario = _context.Users!.FirstOrDefault(u => u.UserName == nombreUsuario && u.Password == contrasena);
             if (usuario != null)
             {
                 // Crear los claims (información del usuario)

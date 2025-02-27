@@ -48,26 +48,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Expenses/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Expenses/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Expenses/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Expenses/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Expenses/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Home/Deportivo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXBvcnRpdm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -92,26 +72,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Incomes/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Incomes/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Incomes/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Incomes/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lc1xFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Incomes/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lc1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Orders/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -130,6 +90,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Orders/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/PaymentDeliveries/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudERlbGl2ZXJpZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/PaymentDeliveries/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudERlbGl2ZXJpZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/PaymentDeliveries/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudERlbGl2ZXJpZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/PaymentDeliveries/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudERlbGl2ZXJpZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/PaymentDeliveries/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudERlbGl2ZXJpZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/matim/OneDrive/Escritorio/Proyectos/AmoElDiseno/AmoElDiseno/Views/Shared/Error.cshtml]

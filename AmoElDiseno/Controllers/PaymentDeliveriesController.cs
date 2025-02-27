@@ -9,22 +9,23 @@ using AmoElDiseno.Models;
 
 namespace AmoElDiseno.Controllers
 {
-    public class IncomesController : Controller
+    public class PaymentDeliveriesController : Controller
     {
         private readonly AppDbContext _context;
 
-        public IncomesController(AppDbContext context)
+        public PaymentDeliveriesController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Incomes
+        // GET: PaymentDeliveries
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Income.ToListAsync());
+            var appDbContext = _context.PaymentDeliveries.Include(p => p.Order);
+            return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Incomes/Details/5
+        // GET: PaymentDeliveries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,42 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            var income = await _context.Income
+            var paymentDelivery = await _context.PaymentDeliveries
+                .Include(p => p.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (income == null)
+            if (paymentDelivery == null)
             {
                 return NotFound();
             }
 
-            return View(income);
+            return View(paymentDelivery);
         }
 
-        // GET: Incomes/Create
+        // GET: PaymentDeliveries/Create
         public IActionResult Create()
         {
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id");
             return View();
         }
 
-        // POST: Incomes/Create
+        // POST: PaymentDeliveries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,Amount,Date")] Income income)
+        public async Task<IActionResult> Create([Bind("Id,OrderId,Date,Amount")] PaymentDelivery paymentDelivery)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(income);
+                _context.Add(paymentDelivery);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(income);
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", paymentDelivery.OrderId);
+            return View(paymentDelivery);
         }
 
-        // GET: Incomes/Edit/5
+        // GET: PaymentDeliveries/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +76,23 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            var income = await _context.Income.FindAsync(id);
-            if (income == null)
+            var paymentDelivery = await _context.PaymentDeliveries.FindAsync(id);
+            if (paymentDelivery == null)
             {
                 return NotFound();
             }
-            return View(income);
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", paymentDelivery.OrderId);
+            return View(paymentDelivery);
         }
 
-        // POST: Incomes/Edit/5
+        // POST: PaymentDeliveries/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,Amount,Date")] Income income)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,Date,Amount")] PaymentDelivery paymentDelivery)
         {
-            if (id != income.Id)
+            if (id != paymentDelivery.Id)
             {
                 return NotFound();
             }
@@ -96,12 +101,12 @@ namespace AmoElDiseno.Controllers
             {
                 try
                 {
-                    _context.Update(income);
+                    _context.Update(paymentDelivery);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IncomeExists(income.Id))
+                    if (!PaymentDeliveryExists(paymentDelivery.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +117,11 @@ namespace AmoElDiseno.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(income);
+            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", paymentDelivery.OrderId);
+            return View(paymentDelivery);
         }
 
-        // GET: Incomes/Delete/5
+        // GET: PaymentDeliveries/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +129,35 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            var income = await _context.Income
+            var paymentDelivery = await _context.PaymentDeliveries
+                .Include(p => p.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (income == null)
+            if (paymentDelivery == null)
             {
                 return NotFound();
             }
 
-            return View(income);
+            return View(paymentDelivery);
         }
 
-        // POST: Incomes/Delete/5
+        // POST: PaymentDeliveries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var income = await _context.Income.FindAsync(id);
-            if (income != null)
+            var paymentDelivery = await _context.PaymentDeliveries.FindAsync(id);
+            if (paymentDelivery != null)
             {
-                _context.Income.Remove(income);
+                _context.PaymentDeliveries.Remove(paymentDelivery);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IncomeExists(int id)
+        private bool PaymentDeliveryExists(int id)
         {
-            return _context.Income.Any(e => e.Id == id);
+            return _context.PaymentDeliveries.Any(e => e.Id == id);
         }
     }
 }

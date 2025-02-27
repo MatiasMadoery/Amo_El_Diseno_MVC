@@ -19,55 +19,72 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var appDbContext = _context.Order.Include(o => o.Customer);
-            return View(await appDbContext.ToListAsync());
+            var orders = _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.PaymentDeliveries) // Incluir las entregas de pago
+                .ToList();
+
+            return View(orders);
         }
 
-        // GET: Orders/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var order = await _context.Order
+        // GET: Orders/Details/5
+        public IActionResult Details(int id)
+        {
+            var order = _context.Orders
                 .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(o => o.PaymentDeliveries)
+                .FirstOrDefault(o => o.Id == id);
+
             if (order == null)
             {
                 return NotFound();
             }
 
-            return View(order);
+            var viewModel = new OrderDetailsViewModel
+            {
+                Order = order
+            };
+
+            return View(viewModel);
         }
 
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id");
-            return View();
+            var model = new Order
+            {
+                Status = OrderStatus.Presupuestado // O el estado por defecto que prefieras
+            };
+            ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
+            return View(model);
         }
+
 
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderNumber,Date,Details,Status,IsPaid,Total,CustomerId")] Order order)
+        public IActionResult AddPaymentDelivery(OrderDetailsViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                viewModel.NewPaymentDelivery.OrderId = viewModel.Order!.Id;
+                _context.PaymentDeliveries.Add(viewModel.NewPaymentDelivery);
+                _context.SaveChanges();
+                return RedirectToAction("Details", new { id = viewModel.Order.Id });
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", order.CustomerId);
-            return View(order);
-        }
 
+            // Si hay errores, recargamos el pedido y devolvemos el ViewModel
+            viewModel.Order = _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.PaymentDeliveries)
+                .FirstOrDefault(o => o.Id == viewModel.Order!.Id);
+
+            return View("Details", viewModel);
+        }
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -76,12 +93,12 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", order.CustomerId);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
             return View(order);
         }
 
@@ -90,7 +107,7 @@ namespace AmoElDiseno.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderNumber,Date,Details,Status,IsPaid,Total,CustomerId")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderNumber,CustomerId,Date,Details,Status,Total")] Order order)
         {
             if (id != order.Id)
             {
@@ -117,7 +134,7 @@ namespace AmoElDiseno.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", order.CustomerId);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
             return View(order);
         }
 
@@ -129,7 +146,7 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Orders
                 .Include(o => o.Customer)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
@@ -145,10 +162,10 @@ namespace AmoElDiseno.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order != null)
             {
-                _context.Order.Remove(order);
+                _context.Orders.Remove(order);
             }
 
             await _context.SaveChangesAsync();
@@ -157,7 +174,7 @@ namespace AmoElDiseno.Controllers
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }

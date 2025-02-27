@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\wwwroot\\css\\web.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\wwwroot\\css\\web.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\models\\orderdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\models\\orderdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\views\\orders\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\views\\orders\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|c:\\users\\matim\\onedrive\\escritorio\\proyectos\\amoeldiseno\\amoeldiseno\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4B8E9B86-C776-463A-A3B7-81C30239210F}|AmoElDiseno\\AmoElDiseno.csproj|solutionrelative:amoeldiseno\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,67 +50,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeDocumentMoniker": "AmoElDiseno\\Program.cs",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Program.cs",
-              "RelativeToolTip": "AmoElDiseno\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "OrderDetailsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\OrderDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "AmoElDiseno\\Models\\OrderDetailsViewModel.cs",
+              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Models\\OrderDetailsViewModel.cs",
+              "RelativeToolTip": "AmoElDiseno\\Models\\OrderDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T11:43:58.47Z",
+              "WhenOpened": "2025-02-27T13:53:01.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Orders\\Details.cshtml",
+              "RelativeDocumentMoniker": "AmoElDiseno\\Views\\Orders\\Details.cshtml",
+              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Orders\\Details.cshtml",
+              "RelativeToolTip": "AmoElDiseno\\Views\\Orders\\Details.cshtml",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwDsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-27T13:43:30.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "AmoElDiseno\\Controllers\\OrdersController.cs",
+              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Controllers\\OrdersController.cs",
+              "RelativeToolTip": "AmoElDiseno\\Controllers\\OrdersController.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAswEkAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T13:25:31.355Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "AmoElDiseno\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "AmoElDiseno\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-27T00:29:41.797Z",
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Orders\\Create.cshtml",
+              "RelativeDocumentMoniker": "AmoElDiseno\\Views\\Orders\\Create.cshtml",
+              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Orders\\Create.cshtml",
+              "RelativeToolTip": "AmoElDiseno\\Views\\Orders\\Create.cshtml",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAuwBoAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-27T13:24:53.811Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "AmoElDiseno\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "AmoElDiseno\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-26T12:41:11.363Z",
+              "WhenOpened": "2025-02-27T13:21:54.781Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "AmoElDiseno\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "AmoElDiseno\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAATAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Orders\\Index.cshtml",
+              "RelativeDocumentMoniker": "AmoElDiseno\\Views\\Orders\\Index.cshtml",
+              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\Views\\Orders\\Index.cshtml",
+              "RelativeToolTip": "AmoElDiseno\\Views\\Orders\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-26T12:20:34.682Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "web.css",
-              "DocumentMoniker": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\wwwroot\\css\\web.css",
-              "RelativeDocumentMoniker": "AmoElDiseno\\wwwroot\\css\\web.css",
-              "ToolTip": "C:\\Users\\matim\\OneDrive\\Escritorio\\Proyectos\\AmoElDiseno\\AmoElDiseno\\wwwroot\\css\\web.css",
-              "RelativeToolTip": "AmoElDiseno\\wwwroot\\css\\web.css",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-26T12:42:56.455Z",
+              "WhenOpened": "2025-02-27T13:20:36.551Z",
               "EditorCaption": ""
             }
           ]
