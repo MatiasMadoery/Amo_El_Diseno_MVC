@@ -23,7 +23,7 @@ namespace AmoElDiseno.Controllers
         {
             var orders = _context.Orders
                 .Include(o => o.Customer)
-                .Include(o => o.PaymentDeliveries) // Incluir las entregas de pago
+                .Include(o => o.PaymentDeliveries)
                 .ToList();
 
             return View(orders);
@@ -56,10 +56,24 @@ namespace AmoElDiseno.Controllers
         {
             var model = new Order
             {
-                Status = OrderStatus.Presupuestado // O el estado por defecto que prefieras
+                Status = OrderStatus.Presupuestado
             };
             ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Orders.Add(order);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
+            return View(order);
         }
 
 
@@ -77,7 +91,6 @@ namespace AmoElDiseno.Controllers
                 return RedirectToAction("Details", new { id = viewModel.Order.Id });
             }
 
-            // Si hay errores, recargamos el pedido y devolvemos el ViewModel
             viewModel.Order = _context.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.PaymentDeliveries)

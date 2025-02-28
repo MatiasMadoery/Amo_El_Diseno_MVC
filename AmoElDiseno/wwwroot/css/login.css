@@ -1,35 +1,94 @@
-﻿body {
-    background-image: url("../img/imagesPage/fondo.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    position: center;
+﻿
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
 }
 
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.3); /* Aumentar la transparencia ajustando el valor alfa (0.3 por ejemplo) */
-        z-index: -1; /* Imagen de fondo detrás de todo el contenido */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 89vh;
+    margin: 0;
+}
+
+.login-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-card-header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+    .login-card-header h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
     }
 
-.card-header {
-    color: white !important;
+.login-card-body {
+    padding: 30px;
+}
+
+.alert-danger {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 1rem;
+    color: #003366;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #003366;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
 .btn {
-    background-color: rgb(24, 13, 105) !important;
+    background-color: #0066cc;
     color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
 }
 
-.container {
-    max-width: 100%;
-    padding: 5px;
+    .btn:hover {
+        color: rgb(193, 193, 193);
+        background-color: #005bb5;
+    }
+
+.form-button {
+    margin-top: 20px;
 }
+
 
 
 @media (min-width: 576px) {
