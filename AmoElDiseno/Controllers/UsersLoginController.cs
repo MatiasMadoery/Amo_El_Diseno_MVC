@@ -46,11 +46,11 @@ namespace AmoElDiseno.Controllers
                 // Redirigir dependiendo del rol
                 if (usuario.Role == "Admin")
                 {
-                    return RedirectToAction("Index", "Home"); // Redirige a una acción de administrador
+                    return RedirectToAction("Index", "Orders"); // Redirige a una acción de administrador
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home"); // Redirige a una acción de usuario
+                    return RedirectToAction("Index", "Orders"); // Redirige a una acción de usuario
                 }
             }
             else

@@ -1,8 +1,11 @@
-﻿namespace AmoElDiseno.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AmoElDiseno.Models
 {
     public enum OrderStatus
     {
-        Presupuestado,
+        Presupuestado,  
+        Aprobado,
         EnConfecccion,
         Entregado
     }
