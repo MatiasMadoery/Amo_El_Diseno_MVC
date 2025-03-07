@@ -4,35 +4,32 @@
 <head>
     <link rel="stylesheet" href="~/css/login.css" />
 </head>
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-center bg-black">
-                    <h2>Inicio de Sesión</h2>
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-card-header">
+            <h2>Inicio de Sesión</h2>
+        </div>
+        <div class="login-card-body">
+            @if (ViewData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewData["Error"]
                 </div>
-                <div class="card-body">
-                    @if (ViewData["Error"] != null)
-                    {
-                        <div class="alert alert-danger">
-                            @ViewData["Error"]
-                        </div>
-                    }
-                    <form asp-action="Login" method="post">
-                        <div class="form-group mb-3">
-                            <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
-                            <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-control" placeholder="Introduce tu nombre de usuario" required />
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="contrasena" class="form-label">Contraseña</label>
-                            <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Introduce tu contraseña" required />
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn">Iniciar Sesión</button>
-                        </div>
-                    </form>
+            }
+            <form action="Login" method="post">
+                <div class="form-group">
+                    <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+                    <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-input" placeholder="Introduce tu nombre de usuario" required />
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="contrasena" class="form-label">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena" class="form-input" placeholder="Introduce tu contraseña" required />
+                </div>
+                <div class="form-button">
+                    <button type="submit" class="btn">Iniciar Sesión</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+

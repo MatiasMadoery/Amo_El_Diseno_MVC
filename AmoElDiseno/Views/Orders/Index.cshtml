@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Order>
 
 <h2>Pedidos</h2>
-<a asp-action="Create" class="btn btn-primary">Crear Nuevo Pedido</a>
+<hr />
+<a asp-action="Create" class="btn-verde">Crear Nuevo Pedido</a>
+<link rel="stylesheet" href="/css/orders.css">
 <table class="table">
     <thead>
         <tr>
@@ -25,9 +27,10 @@
                 <td>@order.Total?.ToString("C")</td>
                 <td>@order.PendingBalance?.ToString("C")</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@order.Id">Detalles</a> |
-                    <a asp-action="Edit" asp-route-id="@order.Id">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@order.Id">Eliminar</a>
+                    <a asp-action="Details" asp-route-id="@order.Id" class="btn-azul">Detalles</a> |
+                    <a asp-action="Edit" asp-route-id="@order.Id" class="btn-amarillo">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@order.Id" class="btn-rojo">Eliminar</a>
+
                 </td>
             </tr>
         }

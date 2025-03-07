@@ -7,7 +7,7 @@ namespace AmoElDiseno.Models
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-            public DbSet<Customer> Customers { get; set; } = default!;
+        public DbSet<Customer> Customers { get; set; } = default!;
         public DbSet<Order> Orders { get; set; } = default!;
         public DbSet<PaymentDelivery> PaymentDeliveries { get; set; } = default!;
         public DbSet<User> Users { get; set; } = default!;

@@ -1,7 +1,7 @@
 ﻿@model Order
 
 <h2>Crear Pedido</h2>
-
+<link rel="stylesheet" href="/css/orders.css">
 <form asp-action="Create" method="post">
     <div class="form-group">
         <label>Número de Pedido</label>
@@ -37,9 +37,9 @@
     </div>
     <div class="form-group">
         <label>Monto Total</label>
-        <input asp-for="Total" type="number" step="0.01" class="form-control" />
+        <input asp-for="Total" type="number" step="0.1" min="0" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Crear Pedido</button>
+    <button type="submit" class="btn-verde">Crear Pedido</button>
 </form>
 
 <a asp-action="Index">Volver a la lista</a>
