@@ -69,7 +69,7 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: PaymentDeliveries/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int? orderId)
         {
             if (id == null)
             {
@@ -81,7 +81,8 @@ namespace AmoElDiseno.Controllers
             {
                 return NotFound();
             }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", paymentDelivery.OrderId);
+            ViewData["OrderId"] = orderId; // Pasar OrderId a la vista
+            ViewData["OrderIdSelectList"] = new SelectList(_context.Orders, "Id", "Id", paymentDelivery.OrderId);
             return View(paymentDelivery);
         }
 
@@ -122,7 +123,7 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: PaymentDeliveries/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, int? orderId)
         {
             if (id == null)
             {
@@ -137,22 +138,24 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
+            ViewData["OrderId"] = orderId; 
+
             return View(paymentDelivery);
         }
 
         // POST: PaymentDeliveries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, int? orderId)
         {
             var paymentDelivery = await _context.PaymentDeliveries.FindAsync(id);
             if (paymentDelivery != null)
             {
                 _context.PaymentDeliveries.Remove(paymentDelivery);
+                await _context.SaveChangesAsync();
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            
+            return RedirectToAction("Details", "Orders", new {id = orderId});
         }
 
         private bool PaymentDeliveryExists(int id)

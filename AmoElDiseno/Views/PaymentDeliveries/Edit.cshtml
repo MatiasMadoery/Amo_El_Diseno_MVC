@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var orderId = ViewData["OrderId"];
 }
 
 <h1>Edit</h1>
@@ -12,12 +13,6 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="OrderId" class="control-label"></label>
-                <select asp-for="OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
-                <span asp-validation-for="OrderId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" class="form-control" />
@@ -36,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Details" asp-controller="Orders" asp-route-id="@orderId">Volver a la edicion del pedido</a>
 </div>
 
 @section Scripts {

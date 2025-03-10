@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
+    var orderId = ViewData["OrderId"];
 }
 
 <h1>Delete</h1>
@@ -15,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Order)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Order.Id)
+            @Html.DisplayFor(model => model.Order!.Id)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Date)
@@ -30,10 +31,12 @@
             @Html.DisplayFor(model => model.Amount)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" name="orderId" value="@orderId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Details" asp-controller="Orders" asp-route-id="@orderId">Back to List</a>
     </form>
+
 </div>
