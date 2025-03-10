@@ -4,9 +4,12 @@ namespace AmoElDiseno.Models
 {
     public enum OrderStatus
     {
-        Presupuestado,  
+        Presupuestado,
+        EnDiseño,
         Aprobado,
-        EnConfecccion,
+        EnProducción,
+        EnConfeccción,
+        EntregaPendiente,
         Entregado
     }
 }
