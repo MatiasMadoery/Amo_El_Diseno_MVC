@@ -67,7 +67,7 @@
         @foreach (var payment in Model.Order.PaymentDeliveries!)
         {
             <tr>
-                <td>@payment.Date.ToShortDateString()</td>
+                <td>@payment.Date?.ToShortDateString()</td>
                 <td>@payment.Amount?.ToString("C")</td>
                 <td>
                     <a 

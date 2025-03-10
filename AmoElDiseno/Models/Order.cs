@@ -6,7 +6,7 @@
         public string? OrderNumber { get; set; }
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime? Date { get; set; } = DateTime.Now;
         public string? Details { get; set; }        
         public OrderStatus Status { get; set; }        
         public decimal? Total { get; set; }
