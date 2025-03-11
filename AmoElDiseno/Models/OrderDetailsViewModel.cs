@@ -4,6 +4,7 @@
     {
         public Order? Order { get; set; }
         public PaymentDelivery NewPaymentDelivery { get; set; } = new PaymentDelivery();
+        public IFormFile? Image { get; set; }
     }
 
 }

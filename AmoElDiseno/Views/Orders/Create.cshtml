@@ -1,36 +1,46 @@
-﻿@model Order
+﻿@model AmoElDiseno.Models.OrderDetailsViewModel
 
 <h2>Crear Pedido</h2>
 <link rel="stylesheet" href="/css/orders.css">
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label>Número de Pedido</label>
-        <input asp-for="OrderNumber" class="form-control" />
+        <input asp-for="Order.OrderNumber" class="form-control" />
+        <span asp-validation-for="Order.OrderNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Cliente</label>
-        <select asp-for="CustomerId" asp-items="ViewBag.Customers" class="form-control"></select>
+        <select asp-for="Order.CustomerId" asp-items="ViewBag.Customers" class="form-control"></select>
+        <span asp-validation-for="Order.CustomerId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Fecha</label>
-        <input asp-for="Date" type="date" class="form-control" />
+        <input asp-for="Order.Date" type="date" class="form-control" />
+        <span asp-validation-for="Order.Date" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Fecha de Entrega</label>
-        <input asp-for="DeliveryDate" type="date" class="form-control" />
+        <input asp-for="Order.DeliveryDate" type="date" class="form-control" />
+        <span asp-validation-for="Order.DeliveryDate" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Detalles</label>
-        <textarea asp-for="Details" class="form-control"></textarea>
+        <textarea asp-for="Order.Details" class="form-control"></textarea>
+        <span asp-validation-for="Order.Details" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Image">Imagen</label>
+        <input type="file" asp-for="Image" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Estado</label>
-        <select asp-for="Status" class="form-control">
+        <select asp-for="Order.Status" class="form-control">
             @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
             {
-                if (Model.Status == (OrderStatus)status)
+                if (Model.Order.Status == (OrderStatus)status)
                 {
-                    <option value="@status" selected>@status</option>
+                    <option value="@status" selected="selected">@status</option>
                 }
                 else
                 {
@@ -38,17 +48,17 @@
                 }
             }
         </select>
+        <span asp-validation-for="Order.Status" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Monto Total</label>
-        <input asp-for="Total" type="number" step="0.1" min="0" class="form-control" />
+        <input asp-for="Order.Total" type="number" step="0.1" min="0" class="form-control" />
+        <span asp-validation-for="Order.Total" class="text-danger"></span>
     </div>
     <button type="submit" class="btn-verde">Crear Pedido</button>
 </form>
-
 <a asp-action="Index">Volver a la lista</a>
-
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AmoElDiseno.Models;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace AmoElDiseno.Controllers
 {
@@ -54,51 +57,71 @@ namespace AmoElDiseno.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            var model = new Order
+            var viewModel = new OrderDetailsViewModel
             {
-                Status = OrderStatus.Presupuestado,
-                Date = DateTime.Now
+                Order = new Order
+                {
+                    Status = OrderStatus.Presupuestado,
+                    Date = DateTime.Now
+                }
             };
-            ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
-            return View(model);
-        }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Orders.Add(order);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
             ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
-            return View(order);
-        }
+            return View(viewModel);
+        }  
 
 
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public IActionResult AddPaymentDelivery(OrderDetailsViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(OrderDetailsViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                viewModel.NewPaymentDelivery.OrderId = viewModel.Order!.Id;
-                _context.PaymentDeliveries.Add(viewModel.NewPaymentDelivery);
-                _context.SaveChanges();
-                return RedirectToAction("Details", new { id = viewModel.Order.Id });
+                // Si se ha cargado una imagen, redimensionarla y guardarla
+                if (viewModel.Image != null && viewModel.Image.Length > 0)
+                {
+                    // Define la ruta donde se guardará la imagen, por ejemplo en wwwroot/img/ordersImages
+                    var fileName = Path.GetFileName(viewModel.Image.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/ordersImages", fileName);
+
+                    // Usamos ImageSharp para redimensionar y comprimir la imagen
+                    using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
+                    {
+                        // Redimensionamos a un ancho máximo de 800px (la altura se ajusta proporcionalmente)
+                        image.Mutate(x => x.Resize(new ResizeOptions
+                        {
+                            Mode = ResizeMode.Max,
+                            Size = new Size(100, 0)
+                        }));
+
+                        // Configuramos el encoder JPEG con una calidad del 75%
+                        var encoder = new JpegEncoder
+                        {
+                            Quality = 65
+                        };
+
+                        // Guardamos la imagen en el servidor
+                        await image.SaveAsync(filePath, encoder);
+                    }
+
+                    // Asignamos la ruta de la imagen al pedido (asegúrate de que tu modelo Order tenga la propiedad ImagePath)
+                    viewModel.Order!.ImagePath = "/img/ordersImages/" + fileName;
+                }
+
+                // Agregamos el pedido a la base de datos
+                _context.Orders.Add(viewModel.Order!);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
 
-            viewModel.Order = _context.Orders
-                .Include(o => o.Customer)
-                .Include(o => o.PaymentDeliveries)
-                .FirstOrDefault(o => o.Id == viewModel.Order!.Id);
-
-            return View("Details", viewModel);
+            // Si hay errores, volvemos a popular el ViewBag para la selección de clientes
+            ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
+            return View(viewModel);
         }
+        
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -107,23 +130,34 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = await _context.Orders
+                .Include(o => o.Customer)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
             if (order == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
-            return View(order);
+
+            var viewModel = new OrderDetailsViewModel
+            {
+                Order = order
+            };
+
+            ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name", order.CustomerId);
+
+            return View(viewModel);
         }
+
 
         // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderNumber,CustomerId,Date,Details,Status,Total")] Order order)
+        public async Task<IActionResult> Edit(int id, OrderDetailsViewModel viewModel)
         {
-            if (id != order.Id)
+            if (id != viewModel.Order!.Id)
             {
                 return NotFound();
             }
@@ -132,25 +166,49 @@ namespace AmoElDiseno.Controllers
             {
                 try
                 {
-                    _context.Update(order);
+                    if (viewModel.Image != null && viewModel.Image.Length > 0)
+                    {
+                        var fileName = Path.GetFileName(viewModel.Image.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/ordersImages", fileName);
+
+                        using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
+                        {
+                            image.Mutate(x => x.Resize(new ResizeOptions
+                            {
+                                Mode = ResizeMode.Max,
+                                Size = new Size(100, 0)
+                            }));
+
+                            var encoder = new JpegEncoder
+                            {
+                                Quality = 65
+                            };
+                            await image.SaveAsync(filePath, encoder);
+                        }
+
+                        viewModel.Order.ImagePath = "/img/ordersImages/" + fileName;
+                    }
+
+                    _context.Update(viewModel.Order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(order.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return StatusCode(StatusCodes.Status409Conflict, "No se puede guardar el pedido porque otro usuario ya ha actualizado los datos.");
+                }
+                catch (Exception ex)
+                {
+                    // Manejamos cualquier otra excepción no esperada.
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Ha ocurrido un error al guardar el pedido: " + ex.Message);
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
-            return View(order);
+
+            ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name", viewModel.Order.CustomerId);
+            return View(viewModel);
         }
+
+
 
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -179,12 +237,27 @@ namespace AmoElDiseno.Controllers
             var order = await _context.Orders.FindAsync(id);
             if (order != null)
             {
+                // Si existe una ruta de imagen, construye la ruta absoluta
+                if (!string.IsNullOrEmpty(order.ImagePath))
+                {
+                    // La propiedad ImagePath es relativa, normalmente por ejemplo "/img/ordersImages/imagen.jpg"
+                    // Se construye la ruta absoluta usando el directorio actual y la carpeta wwwroot:
+                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", order.ImagePath.TrimStart('/'));
+
+                    // Verifica que el archivo exista antes de eliminarlo
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                }
+
                 _context.Orders.Remove(order);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool OrderExists(int id)
         {
