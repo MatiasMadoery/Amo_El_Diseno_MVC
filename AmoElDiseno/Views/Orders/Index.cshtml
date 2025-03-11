@@ -10,8 +10,8 @@
             <th>Número de Pedido</th>
             <th>Cliente</th>
             <th>Fecha</th>
+            <th>Fecha de Entrega</th>
             <th>Estado</th>
-            <th>Monto Total</th>
             <th>Saldo Pendiente</th>
             <th>Acciones</th>
         </tr>
@@ -23,8 +23,8 @@
                 <td>@order.OrderNumber</td>
                 <td>@order.Customer?.Name</td>
                 <td>@order.Date?.ToShortDateString()</td>
+                <td>@order.DeliveryDate?.ToShortDateString()</td>
                 <td>@order.Status</td>
-                <td>@order.Total?.ToString("C")</td>
                 <td>@order.PendingBalance?.ToString("C")</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@order.Id" class="btn-azul">Detalles</a> |

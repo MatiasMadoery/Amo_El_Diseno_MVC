@@ -56,7 +56,8 @@ namespace AmoElDiseno.Controllers
         {
             var model = new Order
             {
-                Status = OrderStatus.Presupuestado
+                Status = OrderStatus.Presupuestado,
+                Date = DateTime.Now
             };
             ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
             return View(model);

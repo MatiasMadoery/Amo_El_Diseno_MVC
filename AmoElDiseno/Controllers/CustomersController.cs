@@ -53,7 +53,7 @@ namespace AmoElDiseno.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LastName,Email,Phone,Province,City,Address")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,Name,LastName,DNI,Email,Phone,Province,City,Address,PostalCode")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace AmoElDiseno.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastName,Email,Phone,Province,City,Address")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastName,DNI,Email,Phone,Province,City,Address,PostalCode")] Customer customer)
         {
             if (id != customer.Id)
             {

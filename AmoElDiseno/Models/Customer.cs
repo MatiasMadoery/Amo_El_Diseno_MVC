@@ -9,6 +9,7 @@ namespace AmoElDiseno.Models
         public string? Name { get; set; }
         [Display(Name = "Apellido")]
         public string? LastName { get; set; }
+        public string? DNI { get; set; }
         public string? Email { get; set; }
         [Display(Name = "Teléfono")]
         public string? Phone { get; set; }
@@ -18,6 +19,8 @@ namespace AmoElDiseno.Models
         public string? City { get; set; }
         [Display(Name = "Dirección")]
         public string? Address { get; set; }
+        [Display(Name = "Código Postal")]
+        public int? PostalCode { get; set; }
 
 
         [Display(Name = "Cliente")]

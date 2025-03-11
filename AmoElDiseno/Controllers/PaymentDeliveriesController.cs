@@ -47,8 +47,13 @@ namespace AmoElDiseno.Controllers
         // GET: PaymentDeliveries/Create
         public IActionResult Create()
         {
+            var model = new PaymentDelivery
+            {
+                Date = DateTime.Now
+            };
+
             ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id");
-            return View();
+            return View(model);
         }
 
         // POST: PaymentDeliveries/Create

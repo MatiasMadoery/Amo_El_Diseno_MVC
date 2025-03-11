@@ -28,19 +28,34 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="DeliveryDate" class="control-label"></label>
+                <input asp-for="DeliveryDate" class="form-control" />
+                <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Details" class="control-label"></label>
                 <input asp-for="Details" class="form-control" />
                 <span asp-validation-for="Details" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <label>Estado</label>
+                <select asp-for="Status" class="form-control">
+                    @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
+                    {
+                        if (Model.Status == (OrderStatus)status)
+                        {
+                            <option value="@status" selected>@status</option>
+                        }
+                        else
+                        {
+                            <option value="@status">@status</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
+                <label>Monto Total</label>
+                <input asp-for="Total" type="number" step="0.1" min="0" class="form-control" />
             </div>
             <button type="submit" class="btn-verde">Guardar</button>
         </form>
