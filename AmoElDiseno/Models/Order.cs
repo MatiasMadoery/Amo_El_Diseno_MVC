@@ -36,7 +36,6 @@ namespace AmoElDiseno.Models
                 return (Total ?? 0) - totalPaid;
             }
         }
-
-
+        public string? ImagePath { get; set; }
     }
 }
