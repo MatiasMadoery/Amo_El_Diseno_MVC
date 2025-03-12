@@ -22,21 +22,48 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Orders
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchString, int page = 1, int pageSize = 5)
         {
-            var orders = _context.Orders
+            // Comenzamos la consulta con las órdenes, incluyendo sus relaciones
+            IQueryable<Order> ordersQuery = _context.Orders
                 .Include(o => o.Customer)
-                .Include(o => o.PaymentDeliveries)
-                .ToList();
+                .Include(o => o.PaymentDeliveries);
 
-            return View(orders);
+            // Filtrar por searchString (por ejemplo, OrderNumber o el nombre del cliente)
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                ordersQuery = ordersQuery.Where(o =>
+                    o.OrderNumber!.Contains(searchString) ||
+                    (o.Customer != null && o.Customer.Name!.Contains(searchString)));
+            }
+
+            // Ordenar en forma descendente para que el número de pedido más alto aparezca primero
+            ordersQuery = ordersQuery.OrderByDescending(o => o.OrderNumber);
+
+            // Obtener el total de órdenes
+            int totalOrders = await ordersQuery.CountAsync();
+
+            // Aplicar paginación
+            var ordersPaged = await ordersQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Crear el paginador (suponiendo que tienes una clase Pager<T> genérica similar a la que usaste para Customers)
+            var pager = new Pager<Order>(ordersPaged, totalOrders, page, pageSize);
+
+            // Para mantener el valor de búsqueda cuando se cambia de página
+            ViewData["searchString"] = searchString;
+
+            return View(pager);
         }
+
 
 
         // GET: Orders/Details/5
         public IActionResult Details(int id)
         {
-            var order = _context.Orders
+            var order = _context.Orders                
                 .Include(o => o.Customer)
                 .Include(o => o.PaymentDeliveries)
                 .FirstOrDefault(o => o.Id == id);
@@ -57,10 +84,21 @@ namespace AmoElDiseno.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
+            // Consultar el último pedido para generar el número incremental
+            var ultimoPedido = _context.Orders.OrderByDescending(p => p.Id).FirstOrDefault();
+            string numeroPedido = "000001";
+            if (ultimoPedido != null && !string.IsNullOrEmpty(ultimoPedido.OrderNumber))
+            {
+                numeroPedido = (int.Parse(ultimoPedido.OrderNumber) + 1).ToString("D6");
+            }
+
+
+            // Crear el view model con un nuevo pedido que ya lleva asignado el número
             var viewModel = new OrderDetailsViewModel
             {
                 Order = new Order
                 {
+                    OrderNumber = numeroPedido,  // Asignación del número generado
                     Status = OrderStatus.Presupuestado,
                     Date = DateTime.Now
                 }
@@ -68,7 +106,8 @@ namespace AmoElDiseno.Controllers
 
             ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
             return View(viewModel);
-        }  
+        }
+
 
 
         // POST: Orders/Create
