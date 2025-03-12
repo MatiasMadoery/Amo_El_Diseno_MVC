@@ -4,6 +4,13 @@
     margin: 0;
     padding: 0;
 }
+.orangeResalt {
+    background-color: orange !important;
+}
+
+.redResalt{
+    background-color: red !important;
+}
 
 .container {
     width: 90%;
