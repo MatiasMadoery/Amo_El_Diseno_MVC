@@ -20,17 +20,21 @@
         @foreach (var order in Model)
         {
             string rowClass = "";
-            if (order.Date.HasValue)
-            {
-                double dayPassed = (DateTime.Now - order.Date.Value).TotalDays;
 
-                if(dayPassed > 21)
+            if(order.Status != OrderStatus.EntregaPendiente && order.Status != OrderStatus.Entregado)
+            {
+                if (order.Date.HasValue)
                 {
-                    rowClass = "redResalt";
-                }
-                if(dayPassed > 14 && dayPassed < 22)
-                {
-                    rowClass = "orangeResalt";
+                    double dayPassed = (DateTime.Now - order.Date.Value).TotalDays;
+
+                    if (dayPassed > 21)
+                    {
+                        rowClass = "redResalt";
+                    }
+                    if (dayPassed > 14 && dayPassed < 22)
+                    {
+                        rowClass = "orangeResalt";
+                    }
                 }
             }
 

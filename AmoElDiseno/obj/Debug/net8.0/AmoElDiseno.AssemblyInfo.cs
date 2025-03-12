@@ -15,10 +15,14 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a726478da83cd3a71fc145e0073e1aab0284fc8")]
 
 
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e6ed6eb06d4f5501423fe2224c2d1b708ca4d51")]
+>>>>>>> 7a74378 (Status validaton for color change)
 [assembly: System.Reflection.AssemblyProductAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AmoElDiseno")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
