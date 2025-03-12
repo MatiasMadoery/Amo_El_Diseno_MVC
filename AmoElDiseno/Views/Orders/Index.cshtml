@@ -3,7 +3,7 @@
 <h2>Pedidos</h2>
 <hr />
 <a asp-action="Create" class="btn-verde">Crear Nuevo Pedido</a>
-<link rel="stylesheet" href="/css/orders.css">
+<link rel="stylesheet" href="~/css/orders.css">
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +19,23 @@
     <tbody>
         @foreach (var order in Model)
         {
-            <tr>
+            string rowClass = "";
+            if (order.Date.HasValue)
+            {
+                double dayPassed = (DateTime.Now - order.Date.Value).TotalDays;
+
+                if(dayPassed > 21)
+                {
+                    rowClass = "redResalt";
+                }
+                if(dayPassed > 14 && dayPassed < 22)
+                {
+                    rowClass = "orangeResalt";
+                }
+            }
+
+
+            <tr class="@rowClass">
                 <td>@order.OrderNumber</td>
                 <td>@order.Customer?.Name</td>
                 <td>@order.Date?.ToShortDateString()</td>
