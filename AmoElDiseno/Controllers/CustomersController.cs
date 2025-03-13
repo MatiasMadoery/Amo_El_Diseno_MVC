@@ -19,6 +19,7 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Customers
+<<<<<<< HEAD
         public async Task<IActionResult> Index(string searchString)
         {
             var customers = _context.Customers.AsQueryable();
@@ -31,6 +32,33 @@ namespace AmoElDiseno.Controllers
             }
 
             return View(await customers.ToListAsync());
+=======
+        public async Task<IActionResult> Index(string searchString, int page = 1, int pageSize = 5)
+        {
+            var customer = from c in _context.Customers select c;
+
+            //Filter by search text if provided
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customer = customer.Where(s => s.Name!.Contains(searchString) || s.LastName!.Contains(searchString));
+            }
+
+            // Get total customers 
+            var totalCustomers = await customer.CountAsync();
+
+            // Apply pagination
+            var customersPager = await customer
+                                         .Skip((page - 1) * pageSize)
+                                         .Take(pageSize)
+                                         .ToListAsync();
+
+            // Create the paginator with the paginated list
+            var pager = new Pager<Customer>(customersPager, totalCustomers, page, pageSize);
+
+            //To maintain the value of the lookup field when the user changes pages
+            ViewData["searchString"] = searchString;
+            return View(pager);
+>>>>>>> origin/matias
         }
 
 
