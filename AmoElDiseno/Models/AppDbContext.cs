@@ -32,6 +32,7 @@ namespace AmoElDiseno.Models
                 .HasForeignKey(pd => pd.OrderId);
             
         }
+        public DbSet<AmoElDiseno.Models.Supplier> Supplier { get; set; } = default!;
 
     }
 }

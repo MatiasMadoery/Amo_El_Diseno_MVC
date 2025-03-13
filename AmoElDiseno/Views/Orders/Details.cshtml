@@ -4,8 +4,14 @@
 <hr />
 
 <link rel="stylesheet" href="/css/orders.css">
+<link rel="stylesheet" href="/css/print.css">
+
 
 <div>
+    <button onclick="window.print()" class="no-print">Imprimir Pedido</button>
+</div>
+
+<div class="print-only">
     <h4>Pedido #@Model.Order!.OrderNumber</h4>
     <dl class="row">
         <dt class="col-sm-2">
@@ -74,7 +80,7 @@
 
 <h3>Entregas de Pago</h3>
 
-<table class="table">
+<table class="table print-only">
     <thead>
         <tr>
             <th>Fecha</th>
@@ -96,7 +102,7 @@
                         asp-route-orderId="@Model.Order.Id"
                         class="btn-amarillo">
                         Editar
-                    </a> |
+                    </a>
                     <a 
                         asp-action="Delete"
                         asp-controller="PaymentDeliveries" 
@@ -111,9 +117,9 @@
     </tbody>
 </table>
 
-<h4>Agregar Pago</h4>
+<h4 class="no-print" >Agregar Pago</h4>
 
-<form asp-action="AddPaymentDelivery" method="post">
+<form asp-action="AddPaymentDelivery" method="post" class="no-print">
     @Html.AntiForgeryToken()
     <input type="hidden" asp-for="Order!.Id" />
 
@@ -132,4 +138,4 @@
     <button type="submit" class="btn-verde">Agregar Pago</button>
 </form>
 
-<a asp-action="Index" class="volver-link">Volver a la lista</a>
+<a asp-action="Index" class="volver-link no-print">Volver a la lista</a>

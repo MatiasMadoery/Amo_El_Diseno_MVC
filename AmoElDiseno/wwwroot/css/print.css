@@ -1,0 +1,49 @@
+﻿@media print {
+
+    .no-print {
+        display: none !important;
+    }
+
+    .print-only {
+        width: 80%;
+        text-align: center;
+        page-break-inside: avoid;
+    }
+
+
+    @page {
+        size: A4 portrait;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+    .img-thumbnail {
+        max-width: 50%;
+        height: auto;
+        margin: 10px 0;
+    }
+}
