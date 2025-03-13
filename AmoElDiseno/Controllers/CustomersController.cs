@@ -19,10 +19,20 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Customers.ToListAsync());
+            var customers = _context.Customers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(c =>
+                    c.Name.Contains(searchString) ||
+                    c.LastName.Contains(searchString));
+            }
+
+            return View(await customers.ToListAsync());
         }
+
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)

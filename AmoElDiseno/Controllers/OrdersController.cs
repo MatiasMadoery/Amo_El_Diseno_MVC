@@ -22,14 +22,29 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Orders
-        public IActionResult Index()
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, string searchString)
         {
             var orders = _context.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.PaymentDeliveries)
-                .ToList();
+                .AsQueryable();
 
-            return View(orders);
+            if (startDate.HasValue)
+            {
+                orders = orders.Where(o => o.Date >= startDate);
+            }
+            if (endDate.HasValue)
+            {
+                orders = orders.Where(o => o.Date <= endDate);
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(o => o.Customer.Name.Contains(searchString) ||
+                                           o.Customer.LastName.Contains(searchString));
+            }
+
+            return View(await orders.ToListAsync());
         }
 
 

@@ -10,6 +10,14 @@
 <p>
     <a asp-action="Create" class="btn-verde">Crear Nuevo Cliente</a>
 </p>
+
+<form method="get" asp-action="Index">
+    <input type="text" name="searchString" id="searchBox"
+           placeholder="Buscar por nombre o apellido..."
+           class="form-control" value="@Context.Request.Query["searchString"]" />
+    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -55,3 +63,18 @@
         }
     </tbody>
 </table>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchBox").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#customersTable tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+}

@@ -4,6 +4,33 @@
 <hr />
 <a asp-action="Create" class="btn-verde">Crear Nuevo Pedido</a>
 <link rel="stylesheet" href="~/css/orders.css">
+
+<form method="get" asp-action="Index">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="searchString">Buscar Cliente:</label>
+            <input type="text" name="searchString" class="form-control"
+                   placeholder="Nombre o Apellido..." value="@Context.Request.Query["searchString"]" />
+        </div>
+        <div class="col-md-2">
+            <label for="startDate">Fecha Inicio:</label>
+            <input type="date" name="startDate" class="form-control" value="@Context.Request.Query["startDate"]" />
+        </div>
+        <div class="col-md-2">
+            <label for="endDate">Fecha Fin:</label>
+            <input type="date" name="endDate" class="form-control" value="@Context.Request.Query["endDate"]" />
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <button type="submit" class="btn btn-primary form-control">Filtrar</button>
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <a href="@Url.Action("Index")" class="btn btn-secondary form-control">Limpiar</a>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
