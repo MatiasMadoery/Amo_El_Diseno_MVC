@@ -40,8 +40,8 @@ namespace AmoElDiseno.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                orders = orders.Where(o => o.Customer.Name.Contains(searchString) ||
-                                           o.Customer.LastName.Contains(searchString));
+                orders = orders.Where(o => o.Customer!.Name!.Contains(searchString) ||
+                                           o.Customer!.LastName!.Contains(searchString));
             }
 
             // Ordenar en forma descendente para que el número de pedido más alto aparezca primero
