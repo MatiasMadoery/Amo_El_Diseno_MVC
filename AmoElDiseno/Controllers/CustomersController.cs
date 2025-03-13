@@ -19,21 +19,40 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Customers
+
         public async Task<IActionResult> Index(string searchString, int page = 1, int pageSize = 5)
         {
-            var customer = from c in _context.Customers select c;
+            var customers = _context.Customers.AsQueryable();
 
-            //Filter by search text if provided
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                customer = customer.Where(s => s.Name!.Contains(searchString) || s.LastName!.Contains(searchString));
+                // Dividir el término de búsqueda en nombre y apellido si tiene más de una palabra
+                var nameParts = searchString.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                if (nameParts.Length == 1)
+                {
+                    // Si solo hay un término, buscar solo por nombre o apellido
+                    customers = customers.Where(c =>
+                        c.Name.Contains(nameParts[0]) || c.LastName.Contains(nameParts[0]));
+                }
+                else if (nameParts.Length >= 2)
+                {
+                    // Si hay más de un término, considerar como nombre y apellido
+                    var firstName = nameParts[0]; // El primer término es el nombre
+                    var lastName = string.Join(" ", nameParts.Skip(1)); // El resto son el apellido
+
+                    customers = customers.Where(c =>
+                        c.Name.Contains(firstName) && c.LastName.Contains(lastName));
+                }
             }
 
-            // Get total customers 
-            var totalCustomers = await customer.CountAsync();
+
+
+                // Get total customers 
+                var totalCustomers = await customers.CountAsync();
 
             // Apply pagination
-            var customersPager = await customer
+            var customersPager = await customers
                                          .Skip((page - 1) * pageSize)
                                          .Take(pageSize)
                                          .ToListAsync();
@@ -42,9 +61,9 @@ namespace AmoElDiseno.Controllers
             var pager = new Pager<Customer>(customersPager, totalCustomers, page, pageSize);
 
             //To maintain the value of the lookup field when the user changes pages
-            ViewData["searchString"] = searchString;
             return View(pager);
         }
+
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -174,5 +193,24 @@ namespace AmoElDiseno.Controllers
         {
             return _context.Customers.Any(e => e.Id == id);
         }
+
+
+
+        public async Task<IActionResult> SearchAutocomplete(string term)
+        {
+            if (string.IsNullOrEmpty(term))
+            {
+                return Json(new List<string>());
+            }
+
+            var customers = await _context.Customers
+                                          .Where(c => c.Name.Contains(term) || c.LastName.Contains(term))
+                                          .Select(c => c.Name + " " + c.LastName) // O cualquier otro campo que quieras mostrar
+                                          .Take(5) // Limitar los resultados
+                                          .ToListAsync();
+
+            return Json(customers);
+        }
+
     }
 }

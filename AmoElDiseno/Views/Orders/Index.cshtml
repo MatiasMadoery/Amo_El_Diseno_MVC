@@ -8,20 +8,31 @@
 
 <h2>Pedidos</h2>
 
-<!-- Formulario de búsqueda -->
-<form method="get" id="filter-form" class="mb-4">
+<form method="get" asp-action="Index">
     <div class="row">
-        <div class="col-8 col-sm-8 col-md-4">
+        <div class="col-md-3">
+            <label for="searchString">Buscar Cliente:</label>
             <input type="text" name="searchString" class="form-control"
-                   placeholder="Buscar pedido..." value="@ViewData["searchString"]" />
+                   placeholder="Nombre o Apellido..." value="@Context.Request.Query["searchString"]" />
         </div>
-        <div class="col-1 col-md-4">
-            <button type="submit" class="btn btn-primary">Buscar</button>
+        <div class="col-md-2">
+            <label for="startDate">Fecha Inicio:</label>
+            <input type="date" name="startDate" class="form-control" value="@Context.Request.Query["startDate"]" />
+        </div>
+        <div class="col-md-2">
+            <label for="endDate">Fecha Fin:</label>
+            <input type="date" name="endDate" class="form-control" value="@Context.Request.Query["endDate"]" />
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <button type="submit" class="btn btn-primary form-control">Filtrar</button>
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <a href="@Url.Action("Index")" class="btn btn-secondary form-control">Limpiar</a>
         </div>
     </div>
 </form>
-
-<hr />
 
 <p>
     <a asp-action="Create" class="btn-verde">Crear Nuevo Pedido</a>
@@ -106,60 +117,3 @@
         @TempData["SuccessMessage"]
     </div>
 }
-
-
-@* @model IEnumerable<Order>
-
-<h2>Pedidos</h2>
-<hr />
-<a asp-action="Create" class="btn-verde">Crear Nuevo Pedido</a>
-<link rel="stylesheet" href="~/css/orders.css">
-<table class="table">
-    <thead>
-        <tr>
-            <th>Número de Pedido</th>
-            <th>Cliente</th>
-            <th>Fecha</th>            
-            <th>Estado</th>
-            <th>Fecha de Entrega</th>
-            <th>Saldo Pendiente</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var order in Model)
-        {
-            string rowClass = "";
-            if (order.Date.HasValue)
-            {
-                double dayPassed = (DateTime.Now - order.Date.Value).TotalDays;
-
-                if(dayPassed > 21)
-                {
-                    rowClass = "redResalt";
-                }
-                if(dayPassed > 14 && dayPassed < 22)
-                {
-                    rowClass = "orangeResalt";
-                }
-            }
-
-
-            <tr class="@rowClass">
-                <td>@order.OrderNumber</td>
-                <td>@order.Customer?.Name</td>
-                <td>@order.Date?.ToShortDateString()</td>                
-                <td>@order.Status</td>
-                <td>@order.DeliveryDate?.ToShortDateString()</td>
-                <td>@order.PendingBalance?.ToString("C")</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@order.Id" class="btn-azul">Detalles</a> |
-                    <a asp-action="Edit" asp-route-id="@order.Id" class="btn-amarillo">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@order.Id" class="btn-rojo">Eliminar</a>
-
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
- *@
