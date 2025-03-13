@@ -9,15 +9,13 @@
 <h1>Clientes</h1>
 
 <!-- Search form -->
-<form method="get" id="filter-form" class="mb-4">
-    <div class="row">
-        <div class="col-8 col-sm-8 col-md-4">
-            <input type="text" name="searchString" class="form-control" placeholder="Buscar cliente..." value="@ViewData["searchString"]" />
-        </div>
-        <div class="col-1 col-md-4">
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </div>
-    </div>
+
+<form method="get" asp-action="Index">
+    <input type="text" name="searchString" id="searchBox"
+           placeholder="Buscar por nombre o apellido..."
+           class="form-control" value="@Context.Request.Query["searchString"]" autocomplete="off" />
+    <ul id="suggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></ul>
+    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
 </form>
 
 <hr />
@@ -26,38 +24,6 @@
     <a asp-action="Create" class="btn-verde">Crear Nuevo Cliente</a>
 </p>
 
-<<<<<<< HEAD
-<form method="get" asp-action="Index">
-    <input type="text" name="searchString" id="searchBox"
-           placeholder="Buscar por nombre o apellido..."
-           class="form-control" value="@Context.Request.Query["searchString"]" />
-    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
-</form>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                Acciones
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-=======
 @if (!Model.Elements.Any())
 {
     <div class="alert alert-warning" role="alert">
@@ -68,7 +34,6 @@ else
 {
     <table class="table">
         <thead>
->>>>>>> origin/matias
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Elements.First().Name)</th>
                 <th>@Html.DisplayNameFor(model => model.Elements.First().LastName)</th>
@@ -78,25 +43,6 @@ else
                     Acciones
                 </th>
             </tr>
-<<<<<<< HEAD
-        }
-    </tbody>
-</table>
-
-
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#searchBox").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#customersTable tbody tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
-            });
-        });
-    </script>
-=======
         </thead>
         <tbody>
             @foreach (var item in Model.Elements)
@@ -142,5 +88,65 @@ else
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
     </div>
->>>>>>> origin/matias
+}
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchBox").on("input", function () {
+                var query = $(this).val();
+
+                if (query.length >= 3) {
+                    $.ajax({
+                        url: '@Url.Action("SearchAutocomplete")',
+                        data: { term: query },
+                        success: function (data) {
+                            var suggestions = $("#suggestions");
+                            suggestions.empty();
+
+                            if (data.length > 0) {
+                                suggestions.show();
+                                $.each(data, function (index, item) {
+                                    suggestions.append('<li class="list-group-item">' + item + '</li>');
+                                });
+
+                                var inputOffset = $("#searchBox").offset().top;
+                                var inputHeight = $("#searchBox").outerHeight();
+                                var suggestionsHeight = suggestions.outerHeight();
+                                var windowHeight = $(window).height();
+
+                                var spaceBelow = windowHeight - (inputOffset + inputHeight);
+
+                                if (spaceBelow > suggestionsHeight) {
+                                    suggestions.css("top", inputOffset + inputHeight);
+                                    suggestions.css("bottom", "auto");
+                                } else {
+                                    suggestions.css("top", "auto");
+                                    suggestions.css("bottom", inputHeight + 10);
+                                }
+                            } else {
+                                suggestions.hide();
+                            }
+                        }
+                    });
+                } else {
+                    $("#suggestions").hide();
+                }
+            });
+
+            $(document).on("click", "#suggestions li", function () {
+                $("#searchBox").val($(this).text());
+                $("#suggestions").hide();
+            });
+
+            $(document).click(function (event) {
+                if (!$(event.target).closest("#searchBox").length) {
+                    $("#suggestions").hide();
+                }
+            });
+        });
+
+    </script>
 }

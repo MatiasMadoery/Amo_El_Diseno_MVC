@@ -9,6 +9,7 @@ using AmoElDiseno.Models;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace AmoElDiseno.Controllers
 {
@@ -22,18 +23,11 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Orders
-<<<<<<< HEAD
-        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, string searchString)
-=======
-        public async Task<IActionResult> Index(string searchString, int page = 1, int pageSize = 5)
->>>>>>> origin/matias
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, string searchString, int page = 1, int pageSize = 5)
         {
-            // Comenzamos la consulta con las órdenes, incluyendo sus relaciones
-            IQueryable<Order> ordersQuery = _context.Orders
+            IQueryable<Order> orders = _context.Orders
                 .Include(o => o.Customer)
-<<<<<<< HEAD
-                .Include(o => o.PaymentDeliveries)
-                .AsQueryable();
+                .Include(o => o.PaymentDeliveries);
 
             if (startDate.HasValue)
             {
@@ -50,26 +44,14 @@ namespace AmoElDiseno.Controllers
                                            o.Customer.LastName.Contains(searchString));
             }
 
-            return View(await orders.ToListAsync());
-=======
-                .Include(o => o.PaymentDeliveries);
-
-            // Filtrar por searchString (por ejemplo, OrderNumber o el nombre del cliente)
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                ordersQuery = ordersQuery.Where(o =>
-                    o.OrderNumber!.Contains(searchString) ||
-                    (o.Customer != null && o.Customer.Name!.Contains(searchString)));
-            }
-
             // Ordenar en forma descendente para que el número de pedido más alto aparezca primero
-            ordersQuery = ordersQuery.OrderByDescending(o => o.OrderNumber);
+            orders = orders.OrderByDescending(o => o.OrderNumber);
 
             // Obtener el total de órdenes
-            int totalOrders = await ordersQuery.CountAsync();
+            int totalOrders = await orders.CountAsync();
 
             // Aplicar paginación
-            var ordersPaged = await ordersQuery
+            var ordersPaged = await orders
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -81,7 +63,6 @@ namespace AmoElDiseno.Controllers
             ViewData["searchString"] = searchString;
 
             return View(pager);
->>>>>>> origin/matias
         }
 
 
