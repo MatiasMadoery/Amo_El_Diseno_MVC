@@ -6,7 +6,7 @@ namespace AmoElDiseno.Models
     {
         public int Id { get; set; }
         [Display(Name = "Fecha")]
-        public DateTime TransactionDate { get; set; } 
+        public DateTime TransactionDate { get; set; } = DateTime.Now;
         [Display(Name = "Cuenta")]
         public AccountingAccount AccountingAccount { get; set; } 
         [Display(Name = "Concepto")]

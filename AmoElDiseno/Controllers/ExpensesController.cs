@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AmoElDiseno.Models;
 using static NuGet.Packaging.PackagingConstants;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace AmoElDiseno.Controllers
 {
@@ -70,24 +73,30 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            var expense = await _context.Expenses
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var expense = await _context.Expenses.FirstOrDefaultAsync(m => m.Id == id);
             if (expense == null)
             {
                 return NotFound();
             }
 
-            return View(expense);
+            // Envolver el Expense en un ExpenseDetailsViewModel
+            var viewModel = new ExpenseDetailsViewModel
+            {
+                Expense = expense
+            };
+
+            return View(viewModel);
         }
+
 
         // GET: Expenses/Create
         public IActionResult Create()
         {
-            var expense = new Expense();
+            var viewModel = new ExpenseDetailsViewModel();
             
             ViewBag.Accounts = new SelectList(Enum.GetValues(typeof(AccountingAccount)).Cast<AccountingAccount>());
 
-            return View(expense);
+            return View(viewModel);
         }
 
 
@@ -96,38 +105,53 @@ namespace AmoElDiseno.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Expense expense, IFormFile PaymentReceiptImage)
+        public async Task<IActionResult> Create(ExpenseDetailsViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                // Si se ha enviado una imagen, guardarla en disco
-                if (PaymentReceiptImage != null && PaymentReceiptImage.Length > 0)
+                // Si se ha cargado una imagen, redimensionarla y guardarla
+                if (viewModel.Image != null && viewModel.Image.Length > 0)
                 {
-                    // Obtén el nombre de archivo y construye la ruta
-                    var fileName = Path.GetFileName(PaymentReceiptImage.FileName);
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "expenses", fileName);
+                    // Define la ruta donde se guardará la imagen
+                    var fileName = Path.GetFileName(viewModel.Image.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/expenses", fileName);
 
-                    // Guarda el archivo en la ruta especificada
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    // Usamos ImageSharp para redimensionar y comprimir la imagen
+                    using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
                     {
-                        await PaymentReceiptImage.CopyToAsync(stream);
+                        // Redimensionamos a un ancho máximo de 800px (la altura se ajusta proporcionalmente)
+                        image.Mutate(x => x.Resize(new ResizeOptions
+                        {
+                            Mode = ResizeMode.Max,
+                            Size = new Size(200, 0)
+                        }));
+
+                        // Configuramos el encoder JPEG con una calidad del 75%
+                        var encoder = new JpegEncoder
+                        {
+                            Quality = 75
+                        };
+
+                        // Guardamos la imagen en el servidor
+                        await image.SaveAsync(filePath, encoder);
                     }
 
-                    // Asigna la ruta relativa a la propiedad PaymentReceiptImagePath
-                    expense.PaymentReceiptImagePath = $"/img/expenses/{fileName}";
+                    // Asignamos la ruta de la imagen al pedido (asegúrate de que tu modelo Order tenga la propiedad ImagePath)
+                    viewModel.Expense!.PaymentReceiptImagePath = "/img/expenses/" + fileName;
                 }
 
-                _context.Add(expense);
+                // Agregamos el pedido a la base de datos
+                _context.Expenses.Add(viewModel.Expense!);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            }    
 
-            // Si no es válido, repuebla la lista de cuentas contables para la vista de error
-            ViewBag.Accounts = new SelectList(Enum.GetValues(typeof(AccountingAccount)).Cast<AccountingAccount>(), expense.AccountingAccount);
-            return View(expense);
+            // Si hay errores, repuebla el dropdown
+            ViewBag.Accounts = new SelectList(Enum.GetValues(typeof(AccountingAccount)).Cast<AccountingAccount>(), viewModel.Expense.AccountingAccount);
+            return View(viewModel);
         }
 
-
+                
         // GET: Expenses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -142,13 +166,18 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            // Rellenamos el ViewBag para el dropdown utilizando el enum AccountingAccount.
-            ViewBag.Accounts = new SelectList(
-                Enum.GetValues(typeof(AccountingAccount)).Cast<AccountingAccount>(),
-                expense.AccountingAccount);
+            // Envuelve el expense en un ExpenseDetailsViewModel
+            var viewModel = new ExpenseDetailsViewModel
+            {
+                Expense = expense
+            };
 
-            return View(expense);
+            // Poblar el dropdown de cuentas contables
+            ViewBag.Accounts = new SelectList(Enum.GetValues(typeof(AccountingAccount)).Cast<AccountingAccount>(), expense.AccountingAccount);
+
+            return View(viewModel);
         }
+
 
 
         // POST: Expenses/Edit/5
@@ -234,6 +263,19 @@ namespace AmoElDiseno.Controllers
             var expense = await _context.Expenses.FindAsync(id);
             if (expense != null)
             {
+                // Si existe una ruta de imagen, construye la ruta absoluta
+                if (!string.IsNullOrEmpty(expense.PaymentReceiptImagePath))
+                {
+                    // Se construye la ruta absoluta usando el directorio actual y la carpeta wwwroot:
+                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", expense.PaymentReceiptImagePath.TrimStart('/'));
+
+                    // Verifica que el archivo exista antes de eliminarlo
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                }
+
                 _context.Expenses.Remove(expense);
             }
 

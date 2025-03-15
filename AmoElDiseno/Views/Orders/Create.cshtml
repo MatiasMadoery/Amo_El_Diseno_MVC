@@ -38,7 +38,7 @@
         <select asp-for="Order.Status" class="form-control">
             @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
             {
-                if (Model.Order.Status == (OrderStatus)status)
+                if (Model.Order!.Status == (OrderStatus)status)
                 {
                     <option value="@status" selected="selected">@status</option>
                 }

@@ -129,7 +129,7 @@ namespace AmoElDiseno.Controllers
                 // Si se ha cargado una imagen, redimensionarla y guardarla
                 if (viewModel.Image != null && viewModel.Image.Length > 0)
                 {
-                    // Define la ruta donde se guardará la imagen, por ejemplo en wwwroot/img/ordersImages
+                    // Define la ruta donde se guardará la imagen
                     var fileName = Path.GetFileName(viewModel.Image.FileName);
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/ordersImages", fileName);
 
@@ -285,8 +285,7 @@ namespace AmoElDiseno.Controllers
             {
                 // Si existe una ruta de imagen, construye la ruta absoluta
                 if (!string.IsNullOrEmpty(order.ImagePath))
-                {
-                    // La propiedad ImagePath es relativa, normalmente por ejemplo "/img/ordersImages/imagen.jpg"
+                {                    
                     // Se construye la ruta absoluta usando el directorio actual y la carpeta wwwroot:
                     var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", order.ImagePath.TrimStart('/'));
 

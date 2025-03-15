@@ -1,11 +1,10 @@
-﻿@model AmoElDiseno.Models.Expense
+﻿@model AmoElDiseno.Models.ExpenseDetailsViewModel
 
 @{
     ViewData["Title"] = "Create Expense";
 }
 
 <h1>Create Expense</h1>
-
 <h4>Expense</h4>
 <hr />
 <div class="row">
@@ -14,38 +13,38 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="TransactionDate" class="control-label"></label>
-                <input asp-for="TransactionDate" class="form-control" />
-                <span asp-validation-for="TransactionDate" class="text-danger"></span>
+                <label asp-for="Expense.TransactionDate" class="control-label"></label>
+                <input asp-for="Expense.TransactionDate" class="form-control" type="date" />
+                <span asp-validation-for="Expense.TransactionDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="AccountingAccount" class="control-label"></label>
-                <select asp-for="AccountingAccount" class="form-control" asp-items="(SelectList)ViewBag.Accounts"></select>
-                <span asp-validation-for="AccountingAccount" class="text-danger"></span>
+                <label asp-for="Expense.AccountingAccount" class="control-label"></label>
+                <select asp-for="Expense.AccountingAccount" class="form-control" asp-items="(SelectList)ViewBag.Accounts"></select>
+                <span asp-validation-for="Expense.AccountingAccount" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Concept" class="control-label"></label>
-                <input asp-for="Concept" class="form-control" />
-                <span asp-validation-for="Concept" class="text-danger"></span>
+                <label asp-for="Expense.Concept" class="control-label"></label>
+                <input asp-for="Expense.Concept" class="form-control" />
+                <span asp-validation-for="Expense.Concept" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
-                <span asp-validation-for="Amount" class="text-danger"></span>
+                <label asp-for="Expense.Amount" class="control-label"></label>
+                <input asp-for="Expense.Amount" class="form-control" />
+                <span asp-validation-for="Expense.Amount" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Recipient" class="control-label"></label>
-                <input asp-for="Recipient" class="form-control" />
-                <span asp-validation-for="Recipient" class="text-danger"></span>
+                <label asp-for="Expense.Recipient" class="control-label"></label>
+                <input asp-for="Expense.Recipient" class="form-control" />
+                <span asp-validation-for="Expense.Recipient" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
-                <label for="PaymentReceiptImage">Payment Receipt Image</label>
-                <input type="file" name="PaymentReceiptImage" class="form-control" />
+                <label for="Image">Payment Receipt Image</label>
+                <input type="file" name="Image" class="form-control" />
             </div>
 
             <div class="form-group">
