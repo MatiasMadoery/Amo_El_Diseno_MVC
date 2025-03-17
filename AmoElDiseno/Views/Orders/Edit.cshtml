@@ -42,7 +42,7 @@
                 <select asp-for="Order.Status" class="form-control">
                     @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
                     {
-                        var selected = Model.Order.Status == (OrderStatus)status ? "selected" : null;
+                        var selected = Model.Order!.Status == (OrderStatus)status ? "selected" : null;
                         <option value="@status" selected="@selected">@status</option>
                     }
                 </select>
@@ -58,7 +58,7 @@
                 <input type="file" asp-for="Image" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-            @if (!string.IsNullOrEmpty(Model.Order.ImagePath))
+            @if (!string.IsNullOrEmpty(Model.Order!.ImagePath))
             {
                 <div class="form-group">
                     <img src="@Model.Order.ImagePath" alt="Imagen del Pedido" class="img-thumbnail" />

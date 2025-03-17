@@ -40,8 +40,8 @@ namespace AmoElDiseno.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                orders = orders.Where(o => o.Customer.Name.Contains(searchString) ||
-                                           o.Customer.LastName.Contains(searchString));
+                orders = orders.Where(o => o.Customer!.Name!.Contains(searchString) ||
+                                           o.Customer!.LastName!.Contains(searchString));
             }
 
             // Ordenar en forma descendente para que el número de pedido más alto aparezca primero
@@ -91,29 +91,31 @@ namespace AmoElDiseno.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            // Consultar el último pedido para generar el número incremental
-            var ultimoPedido = _context.Orders.OrderByDescending(p => p.Id).FirstOrDefault();
-            string numeroPedido = "000001";
-            if (ultimoPedido != null && !string.IsNullOrEmpty(ultimoPedido.OrderNumber))
+            var orderNumberTracker = _context.OrderNumberTrackers.FirstOrDefault();
+            int numeroPedido = 1;
+
+            if (orderNumberTracker != null)
             {
-                numeroPedido = (int.Parse(ultimoPedido.OrderNumber) + 1).ToString("D6");
+                numeroPedido = orderNumberTracker.LastOrderNumber + 1;
             }
 
+            string numeroPedidoStr = numeroPedido.ToString("D6");
 
-            // Crear el view model con un nuevo pedido que ya lleva asignado el número
             var viewModel = new OrderDetailsViewModel
             {
                 Order = new Order
                 {
-                    OrderNumber = numeroPedido,  // Asignación del número generado
+                    OrderNumber = numeroPedidoStr,
                     Status = OrderStatus.Presupuestado,
                     Date = DateTime.Now
                 }
             };
 
             ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
+
             return View(viewModel);
         }
+
 
 
 
@@ -126,48 +128,62 @@ namespace AmoElDiseno.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Si se ha cargado una imagen, redimensionarla y guardarla
+                var orderNumberTracker = _context.OrderNumberTrackers.FirstOrDefault();
+                int numeroPedido = 1;
+
+                if (orderNumberTracker != null)
+                {
+                    numeroPedido = orderNumberTracker.LastOrderNumber + 1;
+                }
+
+                string numeroPedidoStr = numeroPedido.ToString("D6");
+
+                viewModel.Order!.OrderNumber = numeroPedidoStr;
+
                 if (viewModel.Image != null && viewModel.Image.Length > 0)
                 {
-                    // Define la ruta donde se guardará la imagen, por ejemplo en wwwroot/img/ordersImages
                     var fileName = Path.GetFileName(viewModel.Image.FileName);
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/ordersImages", fileName);
 
-                    // Usamos ImageSharp para redimensionar y comprimir la imagen
                     using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
                     {
-                        // Redimensionamos a un ancho máximo de 800px (la altura se ajusta proporcionalmente)
                         image.Mutate(x => x.Resize(new ResizeOptions
                         {
                             Mode = ResizeMode.Max,
                             Size = new Size(100, 0)
                         }));
 
-                        // Configuramos el encoder JPEG con una calidad del 75%
                         var encoder = new JpegEncoder
                         {
                             Quality = 65
                         };
-
-                        // Guardamos la imagen en el servidor
                         await image.SaveAsync(filePath, encoder);
                     }
-
-                    // Asignamos la ruta de la imagen al pedido (asegúrate de que tu modelo Order tenga la propiedad ImagePath)
                     viewModel.Order!.ImagePath = "/img/ordersImages/" + fileName;
                 }
 
-                // Agregamos el pedido a la base de datos
                 _context.Orders.Add(viewModel.Order!);
                 await _context.SaveChangesAsync();
+
+                if (orderNumberTracker == null)
+                {
+                    _context.OrderNumberTrackers.Add(new OrderNumberTracker { LastOrderNumber = numeroPedido });
+                }
+                else
+                {
+                    orderNumberTracker.LastOrderNumber = numeroPedido;
+                }
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
 
-            // Si hay errores, volvemos a popular el ViewBag para la selección de clientes
             ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
             return View(viewModel);
         }
-        
+
+
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -285,8 +301,7 @@ namespace AmoElDiseno.Controllers
             {
                 // Si existe una ruta de imagen, construye la ruta absoluta
                 if (!string.IsNullOrEmpty(order.ImagePath))
-                {
-                    // La propiedad ImagePath es relativa, normalmente por ejemplo "/img/ordersImages/imagen.jpg"
+                {                    
                     // Se construye la ruta absoluta usando el directorio actual y la carpeta wwwroot:
                     var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", order.ImagePath.TrimStart('/'));
 

@@ -11,6 +11,7 @@ namespace AmoElDiseno.Models
         public DbSet<Order> Orders { get; set; } = default!;
         public DbSet<PaymentDelivery> PaymentDeliveries { get; set; } = default!;
         public DbSet<User> Users { get; set; } = default!;
+        public DbSet<Expense> Expenses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,9 +31,15 @@ namespace AmoElDiseno.Models
                 .HasMany(o => o.PaymentDeliveries)
                 .WithOne(pd => pd.Order)
                 .HasForeignKey(pd => pd.OrderId);
+
+            // Conversion de enum AccountingAccount a string
+            modelBuilder.Entity<Expense>()
+                .Property(e => e.AccountingAccount)
+                .HasConversion<string>();
             
         }
         public DbSet<AmoElDiseno.Models.Supplier> Supplier { get; set; } = default!;
+        public DbSet<OrderNumberTracker> OrderNumberTrackers { get; set; }
 
     }
 }

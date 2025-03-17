@@ -4,28 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1>Proveedores</h1>
+<link rel="stylesheet" href="/css/customers.css">
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn-verde">Crear Nuevo Proveedor</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Adress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Locality)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
@@ -39,34 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Input)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccountNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bank)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Branch)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cbu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Transport)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FreightIn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Delivery)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShippAdress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observations)
-            </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -74,18 +35,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Locality)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
@@ -100,36 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Input)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bank)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Branch)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cbu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Transport)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FreightIn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Delivery)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShippAdress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observations)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn-azul">Detalles</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-amarillo">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-rojo">Eliminar</a>
             </td>
         </tr>
 }

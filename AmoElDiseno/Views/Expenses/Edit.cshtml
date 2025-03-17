@@ -1,0 +1,66 @@
+﻿@model AmoElDiseno.Models.ExpenseDetailsViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>EDITAR</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Expense.Id" />
+            <div class="form-group">
+                <label asp-for="Expense.TransactionDate" class="control-label"></label>
+                <input asp-for="Expense.TransactionDate" class="form-control" type="date" />
+                <span asp-validation-for="Expense.TransactionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expense.AccountingAccount" class="control-label"></label>
+                <select asp-for="Expense.AccountingAccount" class="form-control"
+                        asp-items="(SelectList)ViewBag.Accounts"></select>
+                <span asp-validation-for="Expense.AccountingAccount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expense.Concept" class="control-label"></label>
+                <input asp-for="Expense.Concept" class="form-control" />
+                <span asp-validation-for="Expense.Concept" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expense.Amount" class="control-label"></label>
+                <input asp-for="Expense.Amount" class="form-control" type="number"/>
+                <span asp-validation-for="Expense.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expense.Recipient" class="control-label"></label>
+                <input asp-for="Expense.Recipient" class="form-control" />
+                <span asp-validation-for="Expense.Recipient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Image">Imagen</label>
+                <input type="file" asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Expense!.PaymentReceiptImagePath))
+            {
+                <div class="form-group">
+                    <img src="@Url.Content("~" + Model.Expense.PaymentReceiptImagePath)" alt="Imagen" class="img-thumbnail" style="max-width:300px;" />
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -4,6 +4,7 @@ using AmoElDiseno.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmoElDiseno.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313122817_AddExpenses")]
+    partial class AddExpenses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,22 +137,6 @@ namespace AmoElDiseno.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("AmoElDiseno.Models.OrderNumberTracker", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("LastOrderNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrderNumberTrackers");
-                });
-
             modelBuilder.Entity("AmoElDiseno.Models.PaymentDelivery", b =>
                 {
                     b.Property<int>("Id")
@@ -172,73 +159,6 @@ namespace AmoElDiseno.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("PaymentDeliveries");
-                });
-
-            modelBuilder.Entity("AmoElDiseno.Models.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AccountNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Adress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Bank")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Branch")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cbu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DNI")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Delivery")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FreightIn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Input")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Locality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observations")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PostalCode")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippAdress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Transport")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Supplier");
                 });
 
             modelBuilder.Entity("AmoElDiseno.Models.User", b =>

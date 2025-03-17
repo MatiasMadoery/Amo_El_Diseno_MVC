@@ -19,7 +19,6 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Customers
-
         public async Task<IActionResult> Index(string searchString, int page = 1, int pageSize = 5)
         {
             var customers = _context.Customers.AsQueryable();
@@ -33,7 +32,7 @@ namespace AmoElDiseno.Controllers
                 {
                     // Si solo hay un término, buscar solo por nombre o apellido
                     customers = customers.Where(c =>
-                        c.Name.Contains(nameParts[0]) || c.LastName.Contains(nameParts[0]));
+                        c.Name!.Contains(nameParts[0]) || c.LastName!.Contains(nameParts[0]));
                 }
                 else if (nameParts.Length >= 2)
                 {
@@ -42,14 +41,12 @@ namespace AmoElDiseno.Controllers
                     var lastName = string.Join(" ", nameParts.Skip(1)); // El resto son el apellido
 
                     customers = customers.Where(c =>
-                        c.Name.Contains(firstName) && c.LastName.Contains(lastName));
+                        c.Name!.Contains(firstName) && c.LastName!.Contains(lastName));
                 }
             }
 
-
-
-                // Get total customers 
-                var totalCustomers = await customers.CountAsync();
+            // Get total customers 
+           var totalCustomers = await customers.CountAsync();
 
             // Apply pagination
             var customersPager = await customers
@@ -204,7 +201,7 @@ namespace AmoElDiseno.Controllers
             }
 
             var customers = await _context.Customers
-                                          .Where(c => c.Name.Contains(term) || c.LastName.Contains(term))
+                                          .Where(c => c.Name!.Contains(term) || c.LastName!.Contains(term))
                                           .Select(c => c.Name + " " + c.LastName) // O cualquier otro campo que quieras mostrar
                                           .Take(5) // Limitar los resultados
                                           .ToListAsync();
