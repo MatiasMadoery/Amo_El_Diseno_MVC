@@ -4,8 +4,8 @@
     ViewData["Title"] = "Create Expense";
 }
 
-<h1>Create Expense</h1>
-<h4>Expense</h4>
+<h1>NUEVO EGRESO</h1>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,7 +43,7 @@
             </div>
 
             <div class="form-group">
-                <label for="Image">Payment Receipt Image</label>
+                <label for="Image">Comprobante</label>
                 <input type="file" name="Image" class="form-control" />
             </div>
 
@@ -53,9 +53,8 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+<div >
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>
 
 @section Scripts {

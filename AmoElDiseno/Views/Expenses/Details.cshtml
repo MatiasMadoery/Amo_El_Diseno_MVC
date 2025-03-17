@@ -4,7 +4,7 @@
     ViewData["Title"] = "Expense Details";
 }
 
-<h1>Expense Details</h1>
+<h1>EGRESOS</h1>
 <hr />
 
 <link rel="stylesheet" href="/css/customers.css" />
@@ -47,7 +47,7 @@
         </dd>
 
         <dt class="col-sm-2">
-            Payment Receipt
+            Comprobante
         </dt>
         <dd class="col-sm-10">
             @if (!string.IsNullOrWhiteSpace(Model.Expense.PaymentReceiptImagePath))
@@ -56,7 +56,7 @@
             }
             else
             {
-                <p>No payment receipt uploaded.</p>
+                <p>No hay imagen de comprobante.</p>
             }
         </dd>
     </dl>
@@ -65,63 +65,5 @@
 <div class="mt-3">
     <a asp-action="Edit" asp-route-id="@Model.Expense.Id" class="btn btn-warning">Editar</a> 
     |
-    <a asp-action="Index" class="btn btn-secondary">Volver ala lista</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>
-
-
-
-@* @model AmoElDiseno.Models.Expense
-
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
-<div>
-    <h4>Expense</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TransactionDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TransactionDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountingAccount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountingAccount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Concept)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Concept)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipient)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Recipient)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentReceiptImagePath)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentReceiptImagePath)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
- *@
