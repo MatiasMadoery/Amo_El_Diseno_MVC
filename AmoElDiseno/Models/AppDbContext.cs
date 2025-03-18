@@ -12,6 +12,8 @@ namespace AmoElDiseno.Models
         public DbSet<PaymentDelivery> PaymentDeliveries { get; set; } = default!;
         public DbSet<User> Users { get; set; } = default!;
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Supplier> Supplier { get; set; } = default!;
+        public DbSet<OrderNumberTracker> OrderNumberTrackers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,8 +40,7 @@ namespace AmoElDiseno.Models
                 .HasConversion<string>();
             
         }
-        public DbSet<AmoElDiseno.Models.Supplier> Supplier { get; set; } = default!;
-        public DbSet<OrderNumberTracker> OrderNumberTrackers { get; set; }
+       
 
     }
 }

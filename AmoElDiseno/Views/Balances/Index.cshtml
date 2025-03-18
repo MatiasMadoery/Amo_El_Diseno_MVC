@@ -1,0 +1,138 @@
+﻿@model BalanceViewModel
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Balances";
+}
+
+<h1>Balances Financieros</h1>
+
+<!-- Formulario de filtrado -->
+<form asp-action="Balances" method="get" class="mb-4">
+    <div class="row">
+        <!-- Dropdown para el tipo de periodo -->
+        <div class="col-md-3">
+            <label for="periodType">Periodo:</label>
+            <select name="periodType" class="form-control">
+                @foreach (var option in new[] {
+                new { Value = "Mensual", Text = "Mensual", EnumValue = PeriodType.Mensual },
+                new { Value = "Semestral", Text = "Semestral", EnumValue = PeriodType.Semestral },
+                new { Value = "Anual", Text = "Anual", EnumValue = PeriodType.Anual }
+                })
+                {
+                    if (option.EnumValue == Model.SelectedPeriodType)
+                    {
+                        <option value="@option.Value" selected="selected">@option.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@option.Value">@option.Text</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <!-- Input para Año -->
+        <div class="col-md-3">
+            <label for="year">Año:</label>
+            <input type="number" name="year" class="form-control" value="@Model.SelectedYear" />
+        </div>
+
+        <!-- Si el periodo es Mensual mostrará el input para Mes -->
+        @if (Model.SelectedPeriodType == PeriodType.Mensual)
+        {
+            <div class="col-md-3">
+                <label for="month">Mes:</label>
+                <input type="number" name="month" class="form-control" value="@(Model.SelectedMonth ?? DateTime.Now.Month)" min="1" max="12" />
+            </div>
+        }
+        else if (Model.SelectedPeriodType == PeriodType.Semestral)
+        {
+            <div class="col-md-3">
+                <label for="semester">Semestre:</label>
+                <select name="semester" class="form-control">
+                    @if (Model.SelectedSemester == 1)
+                    {
+                        <option value="1" selected="selected">Primer semestre</option>
+                        <option value="2">Segundo semestre</option>
+                    }
+                    else if (Model.SelectedSemester == 2)
+                    {
+                        <option value="1">Primer semestre</option>
+                        <option value="2" selected="selected">Segundo semestre</option>
+                    }
+                    else
+                    {
+                        <option value="1">Primer semestre</option>
+                        <option value="2">Segundo semestre</option>
+                    }
+                </select>
+            </div>
+        }
+
+        <div class="col-md-3 align-self-end">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+<!-- Sección de Ingresos -->
+<h2>Ingresos</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Número de Pedido</th>
+            <th>Importe</th>
+            <th>Detalle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var income in Model.Incomes)
+        {
+            <tr>
+                <td>@income.Date?.ToShortDateString()</td>
+                <td>@income.Order?.OrderNumber</td>
+                <td>@income.Amount?.ToString("C", CultureInfo.CurrentCulture)</td>
+                <td><!-- Otros detalles, si necesarios --></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Sección de Egresos -->
+<h2>Egresos</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Cuenta</th>
+            <th>Concepto</th>
+            <th>Importe</th>
+            <th>Receptor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expense in Model.Expenses)
+        {
+            <tr>
+                <td>@expense.TransactionDate.ToShortDateString()</td>
+                <td>@expense.AccountingAccount</td>
+                <td>@expense.Concept</td>
+                <td>@expense.Amount?.ToString("C", CultureInfo.CurrentCulture)</td>
+                <td>@expense.Recipient</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+<div>
+    <h3>Resumen</h3>
+    <p><strong>Total Ingresos:</strong> @Model.TotalIncome.ToString("C", CultureInfo.CurrentCulture)</p>
+    <p><strong>Total Egresos:</strong> @Model.TotalExpense.ToString("C", CultureInfo.CurrentCulture)</p>
+    <p><strong>Saldo Neto:</strong> @Model.NetBalance.ToString("C", CultureInfo.CurrentCulture)</p>
+</div>
+
