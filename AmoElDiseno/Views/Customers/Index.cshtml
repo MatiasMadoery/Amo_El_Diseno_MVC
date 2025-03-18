@@ -8,15 +8,18 @@
 
 <h1>Clientes</h1>
 
-<!-- Search form -->
+<form id="searchForm" method="get" asp-action="Index">
+    <label for="customerSearch">Buscar Cliente:</label>
+    <select id="customerSearch" class="form-control select2" data-url="@Url.Action("SearchCustomers")">
+        <option value="">Seleccione un Cliente...</option>
+    </select>
 
-<form method="get" asp-action="Index">
-    <input type="text" name="searchString" id="searchBox"
-           placeholder="Buscar por nombre o apellido..."
-           class="form-control" value="@Context.Request.Query["searchString"]" autocomplete="off" />
-    <ul id="suggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></ul>
+    <input type="hidden" name="searchString" id="hiddenSearchInput" value="@Context.Request.Query["searchString"]" />
+
     <button type="submit" class="btn btn-primary mt-2">Buscar</button>
 </form>
+
+
 
 <hr />
 
@@ -92,61 +95,61 @@ else
 
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#searchBox").on("input", function () {
-                var query = $(this).val();
+            var searchInput = $('#hiddenSearchInput').val();
 
-                if (query.length >= 3) {
-                    $.ajax({
-                        url: '@Url.Action("SearchAutocomplete")',
-                        data: { term: query },
-                        success: function (data) {
-                            var suggestions = $("#suggestions");
-                            suggestions.empty();
-
-                            if (data.length > 0) {
-                                suggestions.show();
-                                $.each(data, function (index, item) {
-                                    suggestions.append('<li class="list-group-item">' + item + '</li>');
-                                });
-
-                                var inputOffset = $("#searchBox").offset().top;
-                                var inputHeight = $("#searchBox").outerHeight();
-                                var suggestionsHeight = suggestions.outerHeight();
-                                var windowHeight = $(window).height();
-
-                                var spaceBelow = windowHeight - (inputOffset + inputHeight);
-
-                                if (spaceBelow > suggestionsHeight) {
-                                    suggestions.css("top", inputOffset + inputHeight);
-                                    suggestions.css("bottom", "auto");
-                                } else {
-                                    suggestions.css("top", "auto");
-                                    suggestions.css("bottom", inputHeight + 10);
-                                }
-                            } else {
-                                suggestions.hide();
-                            }
-                        }
-                    });
-                } else {
-                    $("#suggestions").hide();
+            $('#customerSearch').select2({
+                ajax: {
+                    url: $('#customerSearch').data('url'),
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return { term: params.term };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.map(function (customer) {
+                                return { id: customer.text, text: customer.text }; // Enviar nombre completo
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+                placeholder: "Buscar cliente...",
+                allowClear: true,
+                language: {
+                    inputTooShort: function () {
+                        return "Por favor, ingrese 1 o más caracteres";
+                    },
+                    searching: function () {
+                        return "Buscando...";
+                    },
+                    noResults: function () {
+                        return "No se encontraron resultados";
+                    }
                 }
             });
 
-            $(document).on("click", "#suggestions li", function () {
-                $("#searchBox").val($(this).text());
-                $("#suggestions").hide();
+            // Restaurar el valor anterior si hay una búsqueda guardada
+            if (searchInput) {
+                var newOption = new Option(searchInput, searchInput, true, true);
+                $('#customerSearch').append(newOption).trigger('change');
+            }
+
+            // Guardar el texto seleccionado en el input oculto antes de enviar
+            $('#customerSearch').on('select2:select', function (e) {
+                $('#hiddenSearchInput').val(e.params.data.text);
             });
 
-            $(document).click(function (event) {
-                if (!$(event.target).closest("#searchBox").length) {
-                    $("#suggestions").hide();
-                }
+            // Limpiar el input oculto si el usuario borra la selección
+            $('#customerSearch').on('select2:clear', function () {
+                $('#hiddenSearchInput').val('');
             });
         });
-
     </script>
 }
+

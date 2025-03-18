@@ -10,10 +10,11 @@
 
 <form method="get" asp-action="Index">
     <div class="row">
-        <div class="col-md-3">
-            <label for="searchString">Buscar Cliente:</label>
-            <input type="text" name="searchString" class="form-control"
-                   placeholder="Nombre o Apellido..." value="@Context.Request.Query["searchString"]" />
+        <div class="col-md-4">
+            <label for="customerSearch">Buscar Cliente:</label>
+            <select id="customerSearch" class="form-control select2" name="customerId" data-url="@Url.Action("GetCustomers")">
+                <option value="">Seleccione un Cliente...</option>
+            </select>
         </div>
         <div class="col-md-2">
             <label for="startDate">Fecha Inicio:</label>
@@ -116,4 +117,45 @@
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
     </div>
+}
+
+@section Scripts{
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#customerSearch').select2({
+                ajax: {
+                    url: "/Orders/GetCustomers",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return { term: params.term };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.map(function (customer) {
+                                return { id: customer.id, text: customer.text }; // Se usa el ID del cliente
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+                placeholder: "Buscar cliente...",
+                allowClear: true,
+                language: {
+                    inputTooShort: function () {
+                        return "Por favor, ingrese 1 o más caracteres";
+                    },
+                    searching: function () {
+                        return "Buscando...";
+                    },
+                    noResults: function () {
+                        return "No se encontraron resultados";
+                    }
+                }
+            });
+        });
+    </script>
 }
