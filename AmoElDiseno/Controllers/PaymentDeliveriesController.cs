@@ -107,7 +107,16 @@ namespace AmoElDiseno.Controllers
             {
                 try
                 {
-                    _context.Update(paymentDelivery);
+                    var existingPaymentDelivery = await _context.PaymentDeliveries.FindAsync(id);
+                    if (existingPaymentDelivery == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingPaymentDelivery.Date = paymentDelivery.Date;
+                    existingPaymentDelivery.Amount = paymentDelivery.Amount;
+
+                    _context.Update(existingPaymentDelivery);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -121,11 +130,13 @@ namespace AmoElDiseno.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Orders", new { id = paymentDelivery.OrderId });
             }
+
             ViewData["OrderId"] = new SelectList(_context.Orders, "Id", "Id", paymentDelivery.OrderId);
             return View(paymentDelivery);
         }
+
 
         // GET: PaymentDeliveries/Delete/5
         public async Task<IActionResult> Delete(int? id, int? orderId)

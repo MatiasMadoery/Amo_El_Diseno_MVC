@@ -324,5 +324,24 @@ namespace AmoElDiseno.Controllers
         {
             return _context.Orders.Any(e => e.Id == id);
         }
+
+        [HttpPost]
+        public IActionResult AddPaymentDelivery(OrderDetailsViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                viewModel.NewPaymentDelivery.OrderId = viewModel.Order!.Id;
+                _context.PaymentDeliveries.Add(viewModel.NewPaymentDelivery);
+                _context.SaveChanges();
+                return RedirectToAction("Details", new { id = viewModel.Order.Id });
+            }
+
+            viewModel.Order = _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.PaymentDeliveries)
+                .FirstOrDefault(o => o.Id == viewModel.Order!.Id);
+
+            return View("Details", viewModel);
+        }
     }
 }
