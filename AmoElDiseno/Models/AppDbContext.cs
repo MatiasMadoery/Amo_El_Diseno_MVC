@@ -38,6 +38,8 @@ namespace AmoElDiseno.Models
                 .HasConversion<string>();
             
         }
+        public DbSet<AmoElDiseno.Models.Supplier> Supplier { get; set; } = default!;
+        public DbSet<OrderNumberTracker> OrderNumberTrackers { get; set; }
 
     }
 }
