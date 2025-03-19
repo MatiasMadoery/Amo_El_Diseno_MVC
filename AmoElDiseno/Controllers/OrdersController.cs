@@ -23,7 +23,7 @@ namespace AmoElDiseno.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, string searchString, int page = 1, int pageSize = 5)
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, int? customerId, string searchString, int page = 1, int pageSize = 5)
         {
             IQueryable<Order> orders = _context.Orders
                 .Include(o => o.Customer)
@@ -37,29 +37,28 @@ namespace AmoElDiseno.Controllers
             {
                 orders = orders.Where(o => o.Date <= endDate);
             }
-
+            if (customerId.HasValue)
+            {
+                orders = orders.Where(o => o.CustomerId == customerId);
+            }
             if (!string.IsNullOrEmpty(searchString))
             {
                 orders = orders.Where(o => o.Customer!.Name!.Contains(searchString) ||
                                            o.Customer!.LastName!.Contains(searchString));
             }
 
-            // Ordenar en forma descendente para que el número de pedido más alto aparezca primero
             orders = orders.OrderByDescending(o => o.OrderNumber);
 
-            // Obtener el total de órdenes
             int totalOrders = await orders.CountAsync();
 
-            // Aplicar paginación
             var ordersPaged = await orders
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
-            // Crear el paginador (suponiendo que tienes una clase Pager<T> genérica similar a la que usaste para Customers)
+
             var pager = new Pager<Order>(ordersPaged, totalOrders, page, pageSize);
 
-            // Para mantener el valor de búsqueda cuando se cambia de página
             ViewData["searchString"] = searchString;
 
             return View(pager);
@@ -139,6 +138,7 @@ namespace AmoElDiseno.Controllers
                 string numeroPedidoStr = numeroPedido.ToString("D6");
 
                 viewModel.Order!.OrderNumber = numeroPedidoStr;
+                viewModel.Order.CustomerId = viewModel.CustomerId;
 
                 if (viewModel.Image != null && viewModel.Image.Length > 0)
                 {
@@ -343,5 +343,27 @@ namespace AmoElDiseno.Controllers
 
             return View("Details", viewModel);
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetCustomers(string term)
+        {
+            if (string.IsNullOrEmpty(term))
+            {
+                return Json(new List<object>());
+            }
+
+            var customers = await _context.Customers
+                                          .Where(c => c.Name.ToLower().Contains(term.ToLower()) || c.LastName.ToLower().Contains(term.ToLower()))
+                                          .Select(c => new
+                                          {
+                                              id = c.Id,
+                                              text = c.Name + " " + c.LastName
+                                          })
+                                          .Take(10)
+                                          .ToListAsync();
+
+            return Json(customers);
+        }
+
     }
 }

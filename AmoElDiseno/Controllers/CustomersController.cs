@@ -192,18 +192,23 @@ namespace AmoElDiseno.Controllers
         }
 
 
-
-        public async Task<IActionResult> SearchAutocomplete(string term)
+        [HttpGet]
+        public async Task<JsonResult> SearchCustomers(string term)
         {
             if (string.IsNullOrEmpty(term))
             {
-                return Json(new List<string>());
+                return Json(new List<object>());
             }
 
             var customers = await _context.Customers
-                                          .Where(c => c.Name!.Contains(term) || c.LastName!.Contains(term))
-                                          .Select(c => c.Name + " " + c.LastName) // O cualquier otro campo que quieras mostrar
-                                          .Take(5) // Limitar los resultados
+                                          .Where(c => (c.Name ?? "").ToLower().Contains(term.ToLower()) ||
+                                                      (c.LastName ?? "").ToLower().Contains(term.ToLower()))
+                                          .Select(c => new
+                                          {
+                                              id = c.Id,
+                                              text = (c.Name ?? "") + " " + (c.LastName ?? "")
+                                          })
+                                          .Take(10)
                                           .ToListAsync();
 
             return Json(customers);
