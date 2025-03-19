@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AmoElDiseno.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AmoElDiseno.Models;
-using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
-using static NuGet.Packaging.PackagingConstants;
 
 namespace AmoElDiseno.Controllers
 {
@@ -69,7 +64,7 @@ namespace AmoElDiseno.Controllers
         // GET: Orders/Details/5
         public IActionResult Details(int id)
         {
-            var order = _context.Orders                
+            var order = _context.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.PaymentDeliveries)
                 .FirstOrDefault(o => o.Id == id);
@@ -125,6 +120,13 @@ namespace AmoElDiseno.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OrderDetailsViewModel viewModel)
         {
+            System.Diagnostics.Debug.WriteLine($"CustomerId recibido: {viewModel.CustomerId}");
+
+            if (viewModel.Order == null)
+            {
+                viewModel.Order = new Order();
+            }
+
             if (ModelState.IsValid)
             {
                 var orderNumberTracker = _context.OrderNumberTrackers.FirstOrDefault();
@@ -137,8 +139,10 @@ namespace AmoElDiseno.Controllers
 
                 string numeroPedidoStr = numeroPedido.ToString("D6");
 
-                viewModel.Order!.OrderNumber = numeroPedidoStr;
+                viewModel.Order.OrderNumber = numeroPedidoStr;
                 viewModel.Order.CustomerId = viewModel.CustomerId;
+
+                System.Diagnostics.Debug.WriteLine($"CustomerId asignado a la order: {viewModel.Order.CustomerId}");
 
                 if (viewModel.Image != null && viewModel.Image.Length > 0)
                 {
@@ -159,11 +163,14 @@ namespace AmoElDiseno.Controllers
                         };
                         await image.SaveAsync(filePath, encoder);
                     }
+
                     viewModel.Order!.ImagePath = "/img/ordersImages/" + fileName;
                 }
 
-                _context.Orders.Add(viewModel.Order!);
+
+                _context.Orders.Add(viewModel.Order);
                 await _context.SaveChangesAsync();
+
 
                 if (orderNumberTracker == null)
                 {
@@ -182,6 +189,7 @@ namespace AmoElDiseno.Controllers
             ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
             return View(viewModel);
         }
+
 
 
         // GET: Orders/Edit/5
@@ -301,7 +309,7 @@ namespace AmoElDiseno.Controllers
             {
                 // Si existe una ruta de imagen, construye la ruta absoluta
                 if (!string.IsNullOrEmpty(order.ImagePath))
-                {                    
+                {
                     // Se construye la ruta absoluta usando el directorio actual y la carpeta wwwroot:
                     var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", order.ImagePath.TrimStart('/'));
 
