@@ -7,10 +7,10 @@
 
 <h1>Balances Financieros</h1>
 
-<!-- Formulario de filtrado -->
+
 <form asp-action="Balances" method="get" class="mb-4">
     <div class="row">
-        <!-- Dropdown para el tipo de periodo -->
+        
         <div class="col-md-3">
             <label for="periodType">Periodo:</label>
             <select name="periodType" class="form-control">
@@ -31,14 +31,13 @@
                 }
             </select>
         </div>
-
-        <!-- Input para Año -->
+        
         <div class="col-md-3">
             <label for="year">Año:</label>
             <input type="number" name="year" class="form-control" value="@Model.SelectedYear" />
         </div>
 
-        <!-- Si el periodo es Mensual mostrará el input para Mes -->
+        
         @if (Model.SelectedPeriodType == PeriodType.Mensual)
         {
             <div class="col-md-3">
@@ -78,7 +77,7 @@
 
 <hr />
 
-<!-- Sección de Ingresos -->
+
 <h2>Ingresos</h2>
 <table class="table table-striped">
     <thead>
@@ -95,14 +94,13 @@
             <tr>
                 <td>@income.Date?.ToShortDateString()</td>
                 <td>@income.Order?.OrderNumber</td>
-                <td>@income.Amount?.ToString("C", CultureInfo.CurrentCulture)</td>
-                <td><!-- Otros detalles, si necesarios --></td>
+                <td>@income.Amount?.ToString("C", CultureInfo.CurrentCulture)</td>               
             </tr>
         }
     </tbody>
 </table>
 
-<!-- Sección de Egresos -->
+
 <h2>Egresos</h2>
 <table class="table table-striped">
     <thead>
