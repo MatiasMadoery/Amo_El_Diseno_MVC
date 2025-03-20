@@ -8,8 +8,8 @@ namespace AmoElDiseno.Models
         public int OrderId { get; set; }
         public Order? Order { get; set; }
         public DateTime? Date { get; set; } = DateTime.Now;
-        [Required(ErrorMessage = "El campo Monto es obligatorio!")]     
-        public decimal? Amount { get; set; }        
+
+        public decimal? Amount { get; set; } = 0;
 
     }
 }
