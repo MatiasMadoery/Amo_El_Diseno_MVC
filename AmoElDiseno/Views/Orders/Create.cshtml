@@ -1,7 +1,9 @@
 ﻿@model AmoElDiseno.Models.OrderDetailsViewModel
 
-<h2>Crear Pedido</h2>
+<h2>CREAR PEDIDO</h2>
+
 <link rel="stylesheet" href="/css/orders.css">
+
 <form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label>Número de Pedido</label>
@@ -59,7 +61,11 @@
     </div>
     <button type="submit" class="btn-verde">Crear Pedido</button>
 </form>
-<a asp-action="Index">Volver a la lista</a>
+
+<div>
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
+</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />

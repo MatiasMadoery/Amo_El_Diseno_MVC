@@ -1,14 +1,15 @@
 ﻿@model AmoElDiseno.Models.ExpenseDetailsViewModel
 
 @{
-    ViewData["Title"] = "Create Expense";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>NUEVO EGRESO</h1>
+<link rel="stylesheet" href="/css/customers.css">
 
+<h1>NUEVO EGRESO</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div>
         <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -46,15 +47,12 @@
                 <label for="Image">Comprobante</label>
                 <input type="file" name="Image" class="form-control" />
             </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn-verde">Crear Egreso</button>
         </form>
     </div>
 </div>
-<div >
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+<div>
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
 </div>
 
 @section Scripts {

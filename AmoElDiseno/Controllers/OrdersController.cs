@@ -338,7 +338,7 @@ namespace AmoElDiseno.Controllers
         {
             if (ModelState.IsValid)
             {
-                viewModel.NewPaymentDelivery.OrderId = viewModel.Order!.Id;
+                viewModel.NewPaymentDelivery!.OrderId = viewModel.Order!.Id;
                 _context.PaymentDeliveries.Add(viewModel.NewPaymentDelivery);
                 _context.SaveChanges();
                 return RedirectToAction("Details", new { id = viewModel.Order.Id });
@@ -361,7 +361,7 @@ namespace AmoElDiseno.Controllers
             }
 
             var customers = await _context.Customers
-                                          .Where(c => c.Name.ToLower().Contains(term.ToLower()) || c.LastName.ToLower().Contains(term.ToLower()))
+                                          .Where(c => c.Name!.ToLower().Contains(term.ToLower()) || c.LastName!.ToLower().Contains(term.ToLower()))
                                           .Select(c => new
                                           {
                                               id = c.Id,

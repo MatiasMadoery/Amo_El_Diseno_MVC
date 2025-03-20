@@ -1,8 +1,10 @@
 ﻿@model AmoElDiseno.Models.ExpenseDetailsViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
+
+<link rel="stylesheet" href="/css/customers.css">
 
 <h1>EDITAR</h1>
 <hr />
@@ -48,15 +50,13 @@
                     <img src="@Url.Content("~" + Model.Expense.PaymentReceiptImagePath)" alt="Imagen" class="img-thumbnail" style="max-width:300px;" />
                 </div>
             }
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn-verde">Guardar</button>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
 </div>
 
 @section Scripts {

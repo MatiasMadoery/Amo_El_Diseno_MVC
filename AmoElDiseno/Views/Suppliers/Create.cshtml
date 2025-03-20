@@ -1,14 +1,14 @@
 ﻿@model AmoElDiseno.Models.Supplier
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>Crear Proveedor</h1>
+<h1>CREAR PROVEEDOR</h1>
 <hr />
-
+<link rel="stylesheet" href="/css/customers.css">
 <div class="row">
-    <div class="col-md-4">
+    <div>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -106,15 +106,13 @@
                 <input asp-for="Observations" class="form-control" />
                 <span asp-validation-for="Observations" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn-verde">Crear Proveedor</button>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
 </div>
 
 @section Scripts {

@@ -4,12 +4,12 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>ELIMINAR</h1>
+<link rel="stylesheet" href="/css/customers.css">
 
-<div>
-    <h4>Egreso</h4>
-    <hr />
-    <dl class="row">
+<h1>ELIMINAR</h1>
+<hr />
+<div>       
+    <dl class="row gx-2 gy-3">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TransactionDate)
         </dt>
@@ -47,10 +47,9 @@
             @Html.DisplayFor(model => model.PaymentReceiptImagePath)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        <input type="submit" value="Eliminar" class="btn-rojo" />
     </form>
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
 </div>

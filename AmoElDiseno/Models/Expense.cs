@@ -13,7 +13,7 @@ namespace AmoElDiseno.Models
         public string? Concept { get; set; } 
         [Display(Name = "Importe")]
         public decimal? Amount { get; set; } 
-        [Display(Name = "Receptor del egreso")]
+        [Display(Name = "Receptor")]
         public string? Recipient { get; set; } 
         [Display(Name = "Comprobante de pago")]
         public string? PaymentReceiptImagePath { get; set; } 

@@ -1,47 +1,54 @@
 ﻿@model IEnumerable<AmoElDiseno.Models.Supplier>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Proveedores";
 }
 
-<h1>Proveedores</h1>
 <link rel="stylesheet" href="/css/customers.css">
+
+<h1>PROVEEDORES</h1>
+<hr/>
 <p>
     <a asp-action="Create" class="btn-verde">Crear Nuevo Proveedor</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>       
-            <th>
-                @Html.DisplayNameFor(model => model.Input)
-            </th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>     
-            <td>
-                @Html.DisplayFor(modelItem => item.Input)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn-azul">Detalles</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-amarillo">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-rojo">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="text-center align-middle">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Input)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Input)
+                    </td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn-azul">Detalles</a> 
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-amarillo">Editar</a> 
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-rojo">Eliminar</a>
+                        </div>                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

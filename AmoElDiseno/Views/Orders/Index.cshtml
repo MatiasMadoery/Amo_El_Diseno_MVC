@@ -6,7 +6,9 @@
 
 <link rel="stylesheet" href="~/css/orders.css">
 
-<h2>Pedidos</h2>
+<h1>PEDIDOS</h1>
+
+<hr />
 
 <form method="get" asp-action="Index">
     <div class="row">
@@ -38,51 +40,55 @@
 <p>
     <a asp-action="Create" class="btn-verde">Crear Nuevo Pedido</a>
 </p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Número de Pedido</th>
-            <th>Cliente</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Fecha de Entrega</th>
-            <th>Saldo Pendiente</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var order in Model.Elements)  
-        {
-            string rowClass = "";
-            if (order.Date.HasValue)
-            {
-                double dayPassed = (DateTime.Now - order.Date.Value).TotalDays;
-                if (dayPassed > 21)
-                {
-                    rowClass = "redResalt";
-                }
-                else if (dayPassed > 14 && dayPassed < 22)
-                {
-                    rowClass = "orangeResalt";
-                }
-            }
-            <tr class="@rowClass">
-                <td>@order.OrderNumber</td>
-                <td>@order.Customer?.Name</td>
-                <td>@order.Date?.ToShortDateString()</td>
-                <td>@order.Status</td>
-                <td>@order.DeliveryDate?.ToShortDateString()</td>
-                <td>@order.PendingBalance?.ToString("C")</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@order.Id" class="btn-azul">Detalles</a> |
-                    <a asp-action="Edit" asp-route-id="@order.Id" class="btn-amarillo">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@order.Id" class="btn-rojo">Eliminar</a>
-                </td>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="text-center align-middle">
+            <tr>
+                <th>Número de Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Fecha de Entrega</th>
+                <th>Saldo Pendiente</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Elements)
+            {
+                string rowClass = "";
+                if (order.Date.HasValue)
+                {
+                    double dayPassed = (DateTime.Now - order.Date.Value).TotalDays;
+                    if (dayPassed > 21)
+                    {
+                        rowClass = "redResalt";
+                    }
+                    else if (dayPassed > 14 && dayPassed < 22)
+                    {
+                        rowClass = "orangeResalt";
+                    }
+                }
+                <tr class="@rowClass">
+                    <td>@order.OrderNumber</td>
+                    <td>@order.Customer?.Name</td>
+                    <td>@order.Date?.ToShortDateString()</td>
+                    <td>@order.Status</td>
+                    <td>@order.DeliveryDate?.ToShortDateString()</td>
+                    <td>@order.PendingBalance?.ToString("C")</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center">
+                            <a asp-action="Details" asp-route-id="@order.Id" class="btn-azul">Detalles</a> 
+                            <a asp-action="Edit" asp-route-id="@order.Id" class="btn-amarillo">Editar</a> 
+                            <a asp-action="Delete" asp-route-id="@order.Id" class="btn-rojo">Eliminar</a>
+                        </div>                      
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 
 <!-- Controles de paginación -->
 <div class="mt-3">

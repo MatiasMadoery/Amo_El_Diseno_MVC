@@ -1,13 +1,17 @@
 ﻿@model AmoElDiseno.Models.Supplier
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalle";
 }
 
-<h1>Detalles del Proveedor</h1>
+<link rel="stylesheet" href="/css/customers.css">
+
+<h1>DETALLE</h1>
 <hr />
 <div>
-    <dl class="row">
+    <h4>Proveedor</h4>
+    <hr />
+    <dl class="row gx-2 gy-3">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -61,7 +65,8 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Input)
-        </dd>
+        </dd>        
+        <dt></dt> 
         <h4>Datos Bancarios</h4>
         <hr />
         <dt class = "col-sm-2">
@@ -88,6 +93,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Cbu)
         </dd>
+        <dt></dt>
         <h4>Datos de Envío</h4>
         <hr />
         <dt class = "col-sm-2">
@@ -122,7 +128,8 @@
         </dd>
     </dl>
 </div>
+<br />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar</a>
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-azul">Editar</a> |
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
 </div>

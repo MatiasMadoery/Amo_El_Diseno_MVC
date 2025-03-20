@@ -1,16 +1,16 @@
 ﻿@model ExpenseDetailsViewModel
 
 @{
-    ViewData["Title"] = "Expense Details";
+    ViewData["Title"] = "Detalle";
 }
 
-<h1>EGRESOS</h1>
-<hr />
 
 <link rel="stylesheet" href="/css/customers.css" />
 
+<h1>DETALLE</h1>
+<hr />
 <div>
-    <dl class="row">
+    <dl class="row gx-5 gy-3">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Expense.TransactionDate)
         </dt>
@@ -61,9 +61,8 @@
         </dd>
     </dl>
 </div>
-
-<div class="mt-3">
-    <a asp-action="Edit" asp-route-id="@Model.Expense.Id" class="btn btn-warning">Editar</a> 
-    |
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+<br />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Expense.Id" class="btn-azul">Editar</a> |
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
 </div>
