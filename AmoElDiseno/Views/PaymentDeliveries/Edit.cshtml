@@ -1,15 +1,16 @@
 ﻿@model AmoElDiseno.Models.PaymentDelivery
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
     var orderId = ViewData["OrderId"];
 }
 
-<h1>Editar</h1>
+<link rel="stylesheet" href="/css/customers.css">
 
+<h1>EDITAR</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -17,7 +18,7 @@
 
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
+                <input asp-for="Date" class="form-control" type="date"/>
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -25,15 +26,13 @@
                 <input asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn-verde">Guardar</button>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Details" asp-controller="Orders" asp-route-id="@orderId">Volver a la edicion del pedido</a>
+    <a asp-action="Details" asp-controller="Orders" asp-route-id="@orderId" class="volver-link">Volver a la edicion del pedido</a>
 </div>
 
 @section Scripts {
