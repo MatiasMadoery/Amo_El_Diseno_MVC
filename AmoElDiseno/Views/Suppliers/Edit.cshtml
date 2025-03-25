@@ -15,17 +15,17 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Adress" class="control-label"></label>
-                <input asp-for="Adress" class="form-control" />
+                <input asp-for="Adress" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Adress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Locality" class="control-label"></label>
-                <input asp-for="Locality" class="form-control" />
+                <input asp-for="Locality" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Locality" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Region" class="control-label"></label>
-                <input asp-for="Region" class="form-control" />
+                <input asp-for="Region" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Region" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -55,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input" class="control-label"></label>
-                <input asp-for="Input" class="form-control" />
+                <input asp-for="Input" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Input" class="text-danger"></span>
             </div>
             <h4>Datos Bancarios</h4>
@@ -67,12 +67,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Bank" class="control-label"></label>
-                <input asp-for="Bank" class="form-control" />
+                <input asp-for="Bank" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Bank" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Branch" class="control-label"></label>
-                <input asp-for="Branch" class="form-control" />
+                <input asp-for="Branch" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Branch" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -84,27 +84,27 @@
             <hr />
             <div class="form-group">
                 <label asp-for="Transport" class="control-label"></label>
-                <input asp-for="Transport" class="form-control" />
+                <input asp-for="Transport" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Transport" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FreightIn" class="control-label"></label>
-                <input asp-for="FreightIn" class="form-control" />
+                <input asp-for="FreightIn" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="FreightIn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Delivery" class="control-label"></label>
-                <input asp-for="Delivery" class="form-control" />
+                <input asp-for="Delivery" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Delivery" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ShippAdress" class="control-label"></label>
-                <input asp-for="ShippAdress" class="form-control" />
+                <input asp-for="ShippAdress" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="ShippAdress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Observations" class="control-label"></label>
-                <input asp-for="Observations" class="form-control" />
+                <input asp-for="Observations" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Observations" class="text-danger"></span>
             </div>
             <button type="submit" class="btn-verde">Guardar</button>
@@ -117,5 +117,6 @@
 </div>
 
 @section Scripts {
+    <script src="~/js/site.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

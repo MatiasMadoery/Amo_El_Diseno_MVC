@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label asp-for="Expense.Concept" class="control-label"></label>
-                <input asp-for="Expense.Concept" class="form-control" />
+                <input asp-for="Expense.Concept" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Expense.Concept" class="text-danger"></span>
             </div>
 
@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <label asp-for="Expense.Recipient" class="control-label"></label>
-                <input asp-for="Expense.Recipient" class="form-control" />
+                <input asp-for="Expense.Recipient" class="form-control" oninput="capitalizeFirstLetter(this)" />
                 <span asp-validation-for="Expense.Recipient" class="text-danger"></span>
             </div>
 
@@ -56,6 +56,7 @@
 </div>
 
 @section Scripts {
+    <script src="~/js/site.js"></script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
