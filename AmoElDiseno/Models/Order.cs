@@ -7,6 +7,7 @@ namespace AmoElDiseno.Models
         public int Id { get; set; }
         [Display(Name = "Número de Pedido")]
         public string? OrderNumber { get; set; }
+        [Display(Name = "Cliente")]
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
         [Display(Name = "Fecha")]
