@@ -78,7 +78,8 @@
                         <td>@Html.DisplayFor(modelItem => item.AccountingAccount)</td>
                         <td>@Html.DisplayFor(modelItem => item.Recipient)</td>
                         <td>@Html.DisplayFor(modelItem => item.Concept)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                        <td>
+                        <td>@(item.Amount?.ToString("N2") ?? "0,00")</td>
                         <td>
                             <div class="d-flex flex-wrap gap-3 justify-content-center">
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn-azul">Detalles</a> 
