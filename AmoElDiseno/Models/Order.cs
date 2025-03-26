@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AmoElDiseno.Migrations;
+using System.ComponentModel.DataAnnotations;
 
 namespace AmoElDiseno.Models
 {
     public class Order
     {
+        private DateTime? _deliveryDate;
         public int Id { get; set; }
         [Display(Name = "Número de Pedido")]
         public string? OrderNumber { get; set; }
@@ -17,10 +19,11 @@ namespace AmoElDiseno.Models
         {
             get
             {
-                return Date?.AddDays(30);
+                return _deliveryDate ?? Date?.AddDays(30);
             }
             set
             {
+                _deliveryDate = value;
             }
         }
         [Display(Name = "Detalles")]
