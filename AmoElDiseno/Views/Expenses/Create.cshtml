@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label asp-for="Expense.Amount" class="control-label"></label>
-                <input asp-for="Expense.Amount" class="form-control" />
+                <input asp-for="Expense.Amount" class="form-control" type="number" step="0.01" placeholder="$0,00"/>
                 <span asp-validation-for="Expense.Amount" class="text-danger"></span>
             </div>
 
