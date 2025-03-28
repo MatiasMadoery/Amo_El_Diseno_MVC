@@ -24,17 +24,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Order.Date" class="control-label"></label>
-                <input asp-for="Order.Date" class="form-control" />
+                <input asp-for="Order.Date" class="form-control" type="date"/>
                 <span asp-validation-for="Order.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.DeliveryDate" class="control-label"></label>
-                <input asp-for="Order.DeliveryDate" class="form-control" />
+                <input asp-for="Order.DeliveryDate" class="form-control" type="date"/>
                 <span asp-validation-for="Order.DeliveryDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.Details" class="control-label"></label>
-                <input asp-for="Order.Details" class="form-control" />
+                <textarea asp-for="Order.Details" class="form-control" max-rows="15"></textarea>
                 <span asp-validation-for="Order.Details" class="text-danger"></span>
             </div>
             <div class="form-group">

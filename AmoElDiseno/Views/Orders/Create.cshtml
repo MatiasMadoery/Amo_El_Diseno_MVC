@@ -11,7 +11,7 @@
         <span asp-validation-for="Order.OrderNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="CustomerId" class="control-label"></label>
+        <label asp-for="CustomerId" class="control-label">Cliente</label>
         <select asp-for="CustomerId" class="form-control select2" data-url="@Url.Action("GetCustomers", "Order")">
             <option value="">Seleccione un Cliente...</option>
         </select>

@@ -86,7 +86,7 @@ namespace AmoElDiseno.Controllers
             {
                 return NotFound();
             }
-            ViewData["OrderId"] = orderId; // Pasar OrderId a la vista
+            ViewData["OrderId"] = orderId;
             ViewData["OrderIdSelectList"] = new SelectList(_context.Orders, "Id", "Id", paymentDelivery.OrderId);
             return View(paymentDelivery);
         }

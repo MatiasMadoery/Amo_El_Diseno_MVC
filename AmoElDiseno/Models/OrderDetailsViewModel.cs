@@ -9,6 +9,8 @@ namespace AmoElDiseno.Models
         public IFormFile? Image { get; set; }
 
         public int CustomerId { get; set; }
+        [Display(Name = "Fecha de Entrega")]
+        public DateTime? DeliveryDate { get; set; }
     }
 
 }
