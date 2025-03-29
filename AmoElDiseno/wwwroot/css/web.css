@@ -4,177 +4,138 @@
     text-align: center;
 }
 
+/* ----- Página principal ----- */
 
-/*-----Pagina  principal-----*/
-
-/*body*/
 .banner {
-    border: 1px solid black;
     background-image: url(../img/banner.jpg);
     background-size: cover;
     background-position: center;
-    padding: 100px 0;
+    padding: 100px;
     height: 100px;
-    margin-bottom: 25px;
-}
-
-#nuestrosProductos {
-    text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 35px;
 }
 
 .contenedor {
-    margin-top: 25px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));       
+    padding: 100px 0px;/* Añadido padding para mejor visualización en pantallas pequeñas */
 }
 
-section h1 {
-    text-align: left;
-}
+     .contenedor article {
+        border: 3px solid black;
+        border-radius: 5px;
+        padding: 10px; /* Ajustado padding para mejor espaciado */
+        margin-bottom: 25px; /* Reducido el margen inferior */
+    }
 
-article {
-    display: block;
-    border: 3px solid black;
-    border-radius: 5px;
-    padding: 10px 10px;
-    margin-bottom: 100px;
-}
-
-.nosotros article {
-    border: 3px solid black;
-    border-radius: 5px;
-    padding: 10px 10px;
-    margin: 50px;
-}
-
-article p {
-    text-align: center;
-    padding: 0px 10px;
-}
+        .contenedor article p {
+            padding: 10px;
+            text-align: center;
+        }
 
 .imagenes {
-    margin: auto;
     max-width: 400px;
-    max-height: 300px;
+    margin: 0 auto; /* Centrado automático */
 }
 
-article a {
+.contenedor article a {
+    display: inline-block;
     border: 1px solid black;
     border-radius: 5px;
-    padding: 5px 5px;
-    margin-bottom: 15px;
-    transition: all 0.25s;
+    padding: 8px 12px; /* Ajustado padding para mejor visualización */
+    margin-top: 15px;
+    transition: background-color 0.25s, color 0.25s;
 }
 
-    article a:hover {
+    .contenedor article a:hover {
         background-color: rgb(24, 13, 105);
         color: white;
     }
 
-.logo2 {
-    width: 300px;
-    height: 110px;
-    margin-top: -20px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 100px;
-    border-radius: 100px;
-    padding: 20px;
-    background-image: url(../img/banner.jpg);
-    background-size: cover;
-    background-position: center;
-}
-
 #logo2 {
-    width: 110px;
-    float: left;
+    width: 250px;
+    margin-bottom: 40px;
 }
 
 .iconosInfo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1000px;
-    margin-left: 250px;
-    margin-bottom: 30px;
+    justify-content: space-around; /* Distribuir el espacio uniformemente */
+    align-items: center;    
+    margin: 150px auto; /* Centrado automático y margen vertical */
+    padding: 0px 20px;
 }
 
 .seccionIcono {
-    width: 350px;
     text-align: center;
-    margin: 80px;
+    max-width: 300px; /* Limitando el ancho para mejor distribución */
+    margin: 20px; /* Reduciendo los margenes */
 }
 
     .seccionIcono img {
         width: 100px;
         aspect-ratio: 1/1;
+        margin-bottom: 15px;
     }
 
 
-/*-----footer-----*/
+/* ----- Footer ----- */  
+
 footer {
     background-image: url(../img/fondoTrama.png);
     background-size: cover;
-    padding: 20px 0;
-    text-align: center;
-    margin: 0px;
+    padding: 10px 0; /* Aumentado el padding para mejor espaciado vertical */
+    text-align: center;  
 }
 
 .contacto-redes {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    margin: 0 auto 25px auto;
-    padding: 0 10px;
+    justify-content: space-around; /* Cambiado a space-around para mejor distribución */
+    align-items: flex-start; /* Alineación al inicio para mejor control del espaciado */
+    flex-wrap: wrap;    
+    margin: 0 auto 20px auto; /* Reducido el margen inferior */
     color: white;
+    padding: 0 20px; /* Añadido padding horizontal */
 }
 
-#contacto, #redes {
-    flex: 1;
-    margin: -20px 10px;
-}
+    .contacto-redes > div { /* Estilos para los contenedores de contacto y redes */
+        flex: 1;
+        min-width: 250px; /* Ancho mínimo para evitar que se contraigan demasiado */
+        margin: 20px 130px; /* Margen uniforme */
+    }
 
-    #contacto h4, #redes h4 {
-        margin-bottom: 10px;
+    .contacto-redes h4 {
+        margin: 10px;
         color: #777;
     }
 
-    #redes ul {
+    .contacto-redes ul {
         list-style-type: none;
-        padding: 0;
+        padding: 10px;
+        margin-right: 15px;
     }
 
-    #redes li {
-        margin-bottom: 15px;
-        display: block;
+    .contacto-redes li {
+        display: flex;
         align-items: center;
+        margin-bottom: 15px;
     }
 
-#iconoRedes {
-    width: 20px;
-    height: 20px;
-    margin-right: 15px;
-}
-
-#logoFooter {
-    display: block;
-    margin: 0 auto 10px auto;
-    margin-top: 30px;
-}
+    .contacto-redes img { /* Estilos para los iconos de redes */
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+    }
 
 .logoFooter {
+    display: block;
+    margin: 20px auto 10px auto; /* Margen superior ajustado */
     width: 50px;
 }
 
-#pFooter, #pFooter2 {
+.pFooter, .pFooter2 { /* Estilos para los párrafos del footer */
     font-size: 12px;
     color: #777;
-    margin: 0;
+    margin: 5px 0; /* Margen vertical ajustado */
 }
 
 
@@ -186,6 +147,12 @@ footer {
     color: white;
     background-color: rgb(24, 13, 105);
     border-radius: 5px;
+}
+
+#logo2Nosotros {
+    height: 200px; 
+    width: 400px;
+    border-radius: 25px;
 }
 
 
@@ -232,12 +199,11 @@ footer {
         margin: 10px 0;
     }
 
-    .contacto-redes {
-        display: block;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
+        #redes li {
+            display: inline-block;
+            margin: 20px;
+            align-items: center;
+        }
 
     .logoFooter {
         width: 40px;
@@ -251,6 +217,13 @@ footer {
     .contenedorAbm {
         display: block;
         max-width: 300px;
+    }
+
+    #logo2Nosotros {        
+    height: 100px; 
+    width: 200px;
+    border-radius: 25px;
+
     }
 }
 
@@ -295,9 +268,9 @@ footer {
 /* mediaQuery para monitores */
 @media (min-width: 1025px) and (max-width: 1366px) {
     .contenedor {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin: 0 30px;
+        grid-template-columns: repeat(3, 1fr);        
+        margin: 0 0px;
+        
     }
 
     .iconosInfo {
@@ -314,8 +287,7 @@ footer {
 @media (min-width: 1367px) {
     .contenedor {
         grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        margin: 0 50px;
+        gap: 30px;        
     }
 
     .iconosInfo {
