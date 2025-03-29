@@ -25,10 +25,8 @@ namespace AmoElDiseno.Controllers
         // GET: Expenses
         public async Task<IActionResult> Index(string searchString, AccountingAccount? searchAccount, int page = 1, int pageSize = 5)
         {
-            // Inicia la consulta con la entidad Expenses
             IQueryable<Expense> expensesQuery = _context.Expenses;
 
-            // Filtra si se proporcionó un término de búsqueda para Recipient o Concept
             if (!string.IsNullOrEmpty(searchString))
             {
                 expensesQuery = expensesQuery.Where(e =>
@@ -36,28 +34,22 @@ namespace AmoElDiseno.Controllers
                     e.Concept!.Contains(searchString));
             }
 
-            // Filtra si se proporcionó una cuenta contable
             if (searchAccount.HasValue)
             {
                 expensesQuery = expensesQuery.Where(e => e.AccountingAccount == searchAccount);
             }
 
-            // Ordena de forma descendente por TransactionDate (puedes ajustar esto si prefieres otro orden)
             expensesQuery = expensesQuery.OrderByDescending(e => e.TransactionDate);
 
-            // Obtiene el total de registros para la paginación
             int totalExpenses = await expensesQuery.CountAsync();
 
-            // Aplica la paginación
             var expensesPaged = await expensesQuery
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
-            // Crea el objeto Pager<Expense>
             var pager = new Pager<Expense>(expensesPaged, totalExpenses, page, pageSize);
 
-            // Mantiene el término de búsqueda y la cuenta contable en la vista
             ViewData["searchString"] = searchString;
             ViewData["searchAccount"] = searchAccount;
 
@@ -79,7 +71,6 @@ namespace AmoElDiseno.Controllers
                 return NotFound();
             }
 
-            // Envolver el Expense en un ExpenseDetailsViewModel
             var viewModel = new ExpenseDetailsViewModel
             {
                 Expense = expense
@@ -103,55 +94,78 @@ namespace AmoElDiseno.Controllers
         // POST: Expenses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Expenses/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ExpenseDetailsViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                // Si se ha cargado una imagen, redimensionarla y guardarla
+                // Procesar archivo subido si existe
                 if (viewModel.Image != null && viewModel.Image.Length > 0)
                 {
-                    // Define la ruta donde se guardará la imagen
                     var fileName = Path.GetFileName(viewModel.Image.FileName);
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/expenses", fileName);
+                    var extension = Path.GetExtension(fileName).ToLower();
 
-                    // Usamos ImageSharp para redimensionar y comprimir la imagen
-                    using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
+                    // Verificamos si es PDF o imagen
+                    if (extension == ".pdf" || viewModel.Image.ContentType == "application/pdf")
                     {
-                        // Redimensionamos a un ancho máximo de 800px (la altura se ajusta proporcionalmente)
-                        image.Mutate(x => x.Resize(new ResizeOptions
+                        // Ruta destino para archivos PDF
+                        var pdfDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdf/expenses");
+                        if (!Directory.Exists(pdfDirectory))
                         {
-                            Mode = ResizeMode.Max,
-                            Size = new Size(200, 0)
-                        }));
+                            Directory.CreateDirectory(pdfDirectory);
+                        }
+                        var pdfPath = Path.Combine(pdfDirectory, fileName);
 
-                        // Configuramos el encoder JPEG con una calidad del 75%
-                        var encoder = new JpegEncoder
+                        using (var stream = new FileStream(pdfPath, FileMode.Create))
                         {
-                            Quality = 75
-                        };
+                            await viewModel.Image.CopyToAsync(stream);
+                        }
 
-                        // Guardamos la imagen en el servidor
-                        await image.SaveAsync(filePath, encoder);
+                        // Guarda la ruta del PDF en la propiedad adecuada del modelo.
+                        // Asumiremos que en tu entidad Expense agregaste la propiedad PaymentReceiptPDFPath.
+                        viewModel.Expense!.PaymentReceiptPDFPath = "/pdf/expenses/" + fileName;
                     }
+                    else
+                    {
+                        // Procesar imagen con ImageSharp (lo que ya haces)
+                        var imgDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/expenses");
+                        if (!Directory.Exists(imgDirectory))
+                        {
+                            Directory.CreateDirectory(imgDirectory);
+                        }
+                        var imagePath = Path.Combine(imgDirectory, fileName);
 
-                    // Asignamos la ruta de la imagen al pedido (asegúrate de que tu modelo Order tenga la propiedad ImagePath)
-                    viewModel.Expense!.PaymentReceiptImagePath = "/img/expenses/" + fileName;
+                        using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
+                        {
+                            image.Mutate(x => x.Resize(new ResizeOptions
+                            {
+                                Mode = ResizeMode.Max,
+                                Size = new Size(200, 0)
+                            }));
+
+                            var encoder = new JpegEncoder { Quality = 75 };
+                            await image.SaveAsync(imagePath, encoder);
+                        }
+
+                        viewModel.Expense!.PaymentReceiptImagePath = "/img/expenses/" + fileName;
+                    }
                 }
 
-                // Agregamos el pedido a la base de datos
+                // Agregamos el gasto a la base de datos
                 _context.Expenses.Add(viewModel.Expense!);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }    
+            }
 
-            // Si hay errores, repuebla el dropdown
+            // Si hay errores, repoblar el dropdown de cuentas
             ViewBag.Accounts = new SelectList(Enum.GetValues(typeof(AccountingAccount)).Cast<AccountingAccount>(), viewModel.Expense.AccountingAccount);
             return View(viewModel);
         }
 
-                
+
         // GET: Expenses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -196,48 +210,71 @@ namespace AmoElDiseno.Controllers
             {
                 try
                 {
-                    // Procesar la imagen si se subió un nuevo archivo
+                    // Procesar el archivo subido (imagen o PDF)
                     if (viewModel.Image != null && viewModel.Image.Length > 0)
                     {
-                        // Construir la ruta completa a la carpeta donde se almacenarán las imágenes
-                        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "expenses");
-                        if (!Directory.Exists(folderPath))
-                        {
-                            Directory.CreateDirectory(folderPath);
-                        }
-
-                        // Generar un nombre de archivo único
+                        // Obtener el nombre y extensión del archivo
                         var originalFileName = Path.GetFileName(viewModel.Image.FileName);
-                        var fileName = $"{Guid.NewGuid()}_{originalFileName}";
-                        var filePath = Path.Combine(folderPath, fileName);
+                        var extension = Path.GetExtension(originalFileName).ToLowerInvariant();
 
-                        // Depurar (opcional)
-                        Console.WriteLine("Guardando imagen en: " + filePath);
-
-                        // Usamos ImageSharp para redimensionar la imagen
-                        using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
+                        // Si es PDF
+                        if (extension == ".pdf" || viewModel.Image.ContentType == "application/pdf")
                         {
-                            image.Mutate(x => x.Resize(new ResizeOptions
+                            var pdfDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "pdf", "expenses");
+                            if (!Directory.Exists(pdfDirectory))
                             {
-                                Mode = ResizeMode.Max,
-                                // Puedes ajustar el tamaño según lo necesites; aquí se establece un ancho máximo de 200px
-                                Size = new Size(200, 0)
-                            }));
+                                Directory.CreateDirectory(pdfDirectory);
+                            }
 
-                            // Define la calidad del encoder JPEG
-                            var encoder = new JpegEncoder { Quality = 75 };
-                            await image.SaveAsync(filePath, encoder);
+                            // Generar un nombre único para el archivo PDF
+                            var fileName = $"{Guid.NewGuid()}_{originalFileName}";
+                            var pdfPath = Path.Combine(pdfDirectory, fileName);
+
+                            using (var stream = new FileStream(pdfPath, FileMode.Create))
+                            {
+                                await viewModel.Image.CopyToAsync(stream);
+                            }
+                            // Asigna la ruta del PDF en la propiedad correspondiente.
+                            viewModel.Expense.PaymentReceiptPDFPath = "/pdf/expenses/" + fileName;
+                            // También puedes limpiar la propiedad de imagen si lo consideras necesario:
+                            viewModel.Expense.PaymentReceiptImagePath = null;
                         }
+                        else
+                        {
+                            // Procesar la imagen con ImageSharp
+                            var imgDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "expenses");
+                            if (!Directory.Exists(imgDirectory))
+                            {
+                                Directory.CreateDirectory(imgDirectory);
+                            }
 
-                        // Asigna la ruta relativa al comprobante de pago en el modelo
-                        viewModel.Expense.PaymentReceiptImagePath = "/img/expenses/" + fileName;
-                        Console.WriteLine("Ruta asignada en modelo: " + viewModel.Expense.PaymentReceiptImagePath);
+                            var fileName = $"{Guid.NewGuid()}_{originalFileName}";
+                            var filePath = Path.Combine(imgDirectory, fileName);
+
+                            Console.WriteLine("Guardando imagen en: " + filePath);
+
+                            using (var image = await Image.LoadAsync(viewModel.Image.OpenReadStream()))
+                            {
+                                image.Mutate(x => x.Resize(new ResizeOptions
+                                {
+                                    Mode = ResizeMode.Max,
+                                    Size = new Size(200, 0) // Redimensiona manteniendo la proporción
+                                }));
+
+                                var encoder = new JpegEncoder { Quality = 75 };
+                                await image.SaveAsync(filePath, encoder);
+                            }
+
+                            viewModel.Expense.PaymentReceiptImagePath = "/img/expenses/" + fileName;
+                            Console.WriteLine("Ruta asignada en modelo: " + viewModel.Expense.PaymentReceiptImagePath);
+                            // Si se subió una imagen, podrías querer limpiar la propiedad PDF
+                            viewModel.Expense.PaymentReceiptPDFPath = null;
+                        }
                     }
 
-                    // Actualiza la entidad en la base de datos
+                    // Actualizamos la entidad en la BD
                     _context.Update(viewModel.Expense);
                     await _context.SaveChangesAsync();
-
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -253,9 +290,9 @@ namespace AmoElDiseno.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Si el ModelState no es válido, repobla el dropdown de cuentas contables
+            // Si el ModelState no es válido, repoblar el dropdown de cuentas contables
             ViewBag.Accounts = new SelectList(Enum.GetValues(typeof(AccountingAccount))
-                                                  .Cast<AccountingAccount>(), viewModel.Expense.AccountingAccount);
+                                           .Cast<AccountingAccount>(), viewModel.Expense.AccountingAccount);
             return View(viewModel);
         }
 
@@ -281,6 +318,7 @@ namespace AmoElDiseno.Controllers
         }
 
         // POST: Expenses/Delete/5
+        // POST: Expenses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -288,16 +326,24 @@ namespace AmoElDiseno.Controllers
             var expense = await _context.Expenses.FindAsync(id);
             if (expense != null)
             {
-                // Si existe una ruta de imagen, construye la ruta absoluta
+                // Si existe una ruta de imagen, eliminarla
                 if (!string.IsNullOrEmpty(expense.PaymentReceiptImagePath))
                 {
-                    // Se construye la ruta absoluta usando el directorio actual y la carpeta wwwroot:
-                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", expense.PaymentReceiptImagePath.TrimStart('/'));
-
-                    // Verifica que el archivo exista antes de eliminarlo
-                    if (System.IO.File.Exists(fullPath))
+                    // Construir la ruta absoluta usando el directorio actual y la carpeta wwwroot:
+                    var fullPathImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", expense.PaymentReceiptImagePath.TrimStart('/'));
+                    if (System.IO.File.Exists(fullPathImage))
                     {
-                        System.IO.File.Delete(fullPath);
+                        System.IO.File.Delete(fullPathImage);
+                    }
+                }
+
+                // Si existe una ruta de PDF, eliminarla
+                if (!string.IsNullOrEmpty(expense.PaymentReceiptPDFPath))
+                {
+                    var fullPathPdf = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", expense.PaymentReceiptPDFPath.TrimStart('/'));
+                    if (System.IO.File.Exists(fullPathPdf))
+                    {
+                        System.IO.File.Delete(fullPathPdf);
                     }
                 }
 
@@ -307,6 +353,6 @@ namespace AmoElDiseno.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-   
+
     }
 }

@@ -17,6 +17,8 @@ namespace AmoElDiseno.Models
         public string? Recipient { get; set; } 
         [Display(Name = "Comprobante de pago")]
         public string? PaymentReceiptImagePath { get; set; } 
+
+        public string? PaymentReceiptPDFPath { get; set; }
     }
 
 }

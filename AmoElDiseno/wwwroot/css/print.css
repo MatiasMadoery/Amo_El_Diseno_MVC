@@ -1,4 +1,17 @@
 ﻿@media print {
+    .print-logo {
+        display: block; 
+        position: absolute; 
+        top: 10px; 
+        right: -700px;
+        margin-bottom: 0; 
+    }
+
+
+    .print-logo img {
+        width: 80px; 
+        height: auto; 
+    }
 
     .no-print {        
         display: none !important;        
@@ -6,40 +19,40 @@
 
     .print-only {
         width: 80%;
-        text-align: center;
+        text-align: left;
         page-break-inside: avoid;
     }
 
-
     @page {
         size: A4 portrait;
+        margin: 30px;
     }
 
     body {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: start;
+        height: auto;
         margin: 0;
         padding: 0;
     }
 
-    
     .table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
     }
 
-        .table th, .table td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
+    .table th, .table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
 
-        .table th {
-            background-color: #f2f2f2;
-        }
+    .table th {
+        background-color: #f2f2f2;
+    }
 
     .img-thumbnail {
         max-width: 50%;

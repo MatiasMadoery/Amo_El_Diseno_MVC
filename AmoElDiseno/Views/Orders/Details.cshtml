@@ -1,5 +1,9 @@
 ﻿@model OrderDetailsViewModel
 
+<div class="print-logo print-only">
+    <img src="~/img/amoELDisenioNegro.png" alt="Logo" class="img-fluid" />
+</div>
+
 <h2>DETALLE PEDIDO</h2>
 <hr />
 
@@ -79,7 +83,7 @@
         <tr>
             <th>Fecha</th>
             <th>Monto</th>
-            <th>Acciones</th>
+            <th class="no-print">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -88,7 +92,7 @@
             <tr>
                 <td>@payment.Date?.ToShortDateString()</td>
                 <td>@payment.Amount?.ToString("C")</td>
-                <td>
+                <td class="no-print"> 
                     <div class="d-flex flex-wrap gap-3 justify-content-center">
                         <a asp-action="Edit"
                            asp-controller="PaymentDeliveries"

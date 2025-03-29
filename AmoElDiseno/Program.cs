@@ -2,6 +2,7 @@ using AmoElDiseno.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Globalization;
 using static AmoElDiseno.Models.AppDbContext;
 
 var builder = WebApplication.CreateBuilder(args);

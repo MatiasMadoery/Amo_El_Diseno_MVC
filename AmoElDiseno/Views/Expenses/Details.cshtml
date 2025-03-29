@@ -36,27 +36,27 @@
             @Html.DisplayNameFor(model => model.Expense.Amount)
         </dt>
         <dd class="col-sm-10">
-            @Model.Expense.Amount?.ToString("C")
+            @Model.Expense.Amount?.ToString("C") 
         </dd>
-
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Expense.Recipient)
         </dt>
         <dd class="col-sm-10">
             @Model.Expense.Recipient
         </dd>
-
-        <dt class="col-sm-2">
-            Comprobante
-        </dt>
+        <dt class="col-sm-2">Comprobante de Pago</dt>
         <dd class="col-sm-10">
-            @if (!string.IsNullOrWhiteSpace(Model.Expense.PaymentReceiptImagePath))
+            @if (!string.IsNullOrEmpty(Model.Expense.PaymentReceiptPDFPath))
             {
-                <img src="@Url.Content(Model.Expense.PaymentReceiptImagePath)" alt="Payment Receipt" class="img-thumbnail" style="max-width:300px;" />
+                <a href="@Model.Expense.PaymentReceiptPDFPath" target="_blank">Ver PDF</a>
+            }
+            else if (!string.IsNullOrEmpty(Model.Expense.PaymentReceiptImagePath))
+            {
+                <img src="@Model.Expense.PaymentReceiptImagePath" alt="Imagen del Comprobante" class="img-thumbnail" />
             }
             else
             {
-                <p>No hay imagen de comprobante.</p>
+                <p>No hay comprobante de pago cargado.</p>
             }
         </dd>
     </dl>
