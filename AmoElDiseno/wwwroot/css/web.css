@@ -18,14 +18,14 @@
 .contenedor {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));       
-    padding: 100px 0px;/* Añadido padding para mejor visualización en pantallas pequeñas */
+    padding: 100px 0px;
 }
 
      .contenedor article {
         border: 3px solid black;
         border-radius: 5px;
-        padding: 10px; /* Ajustado padding para mejor espaciado */
-        margin-bottom: 25px; /* Reducido el margen inferior */
+        padding: 10px; 
+        margin-bottom: 25px; 
     }
 
         .contenedor article p {
@@ -35,14 +35,14 @@
 
 .imagenes {
     max-width: 400px;
-    margin: 0 auto; /* Centrado automático */
+    margin: 0 auto; 
 }
 
 .contenedor article a {
     display: inline-block;
     border: 1px solid black;
     border-radius: 5px;
-    padding: 8px 12px; /* Ajustado padding para mejor visualización */
+    padding: 8px 12px; 
     margin-top: 15px;
     transition: background-color 0.25s, color 0.25s;
 }
@@ -59,16 +59,16 @@
 
 .iconosInfo {
     display: flex;
-    justify-content: space-around; /* Distribuir el espacio uniformemente */
+    justify-content: space-around; 
     align-items: center;    
-    margin: 150px auto; /* Centrado automático y margen vertical */
+    margin: 150px auto; 
     padding: 0px 20px;
 }
 
 .seccionIcono {
     text-align: center;
-    max-width: 300px; /* Limitando el ancho para mejor distribución */
-    margin: 20px; /* Reduciendo los margenes */
+    max-width: 300px; 
+    margin: 20px; 
 }
 
     .seccionIcono img {
@@ -83,24 +83,23 @@
 footer {
     background-image: url(../img/fondoTrama.png);
     background-size: cover;
-    padding: 10px 0; /* Aumentado el padding para mejor espaciado vertical */
+    padding: 10px 0; 
     text-align: center;  
 }
 
 .contacto-redes {
     display: flex;
-    justify-content: space-around; /* Cambiado a space-around para mejor distribución */
-    align-items: flex-start; /* Alineación al inicio para mejor control del espaciado */
+    justify-content: space-around; 
+    align-items: flex-start; 
     flex-wrap: wrap;    
-    margin: 0 auto 20px auto; /* Reducido el margen inferior */
+    margin: 0 auto 20px auto; 
     color: white;
-    padding: 0 20px; /* Añadido padding horizontal */
+    padding: 0 20px; 
 }
 
-    .contacto-redes > div { /* Estilos para los contenedores de contacto y redes */
-        flex: 1;
-        min-width: 250px; /* Ancho mínimo para evitar que se contraigan demasiado */
-        margin: 20px 130px; /* Margen uniforme */
+    .contacto-redes > div { 
+        min-width: 250px;
+        margin: 20px 130px; 
     }
 
     .contacto-redes h4 {
@@ -120,7 +119,7 @@ footer {
         margin-bottom: 15px;
     }
 
-    .contacto-redes img { /* Estilos para los iconos de redes */
+    .contacto-redes img { 
         width: 20px;
         height: 20px;
         margin-right: 15px;
@@ -128,14 +127,14 @@ footer {
 
 .logoFooter {
     display: block;
-    margin: 20px auto 10px auto; /* Margen superior ajustado */
+    margin: 20px auto 10px auto; 
     width: 50px;
 }
 
-.pFooter, .pFooter2 { /* Estilos para los párrafos del footer */
+.pFooter, .pFooter2 { 
     font-size: 12px;
     color: #777;
-    margin: 5px 0; /* Margen vertical ajustado */
+    margin: 5px 0; 
 }
 
 
