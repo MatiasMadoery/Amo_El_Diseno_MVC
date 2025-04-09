@@ -13,6 +13,8 @@ namespace AmoElDiseno.Controllers
             _context = context;
         }
 
+        //
+
         // GET: Articles
         public async Task<IActionResult> Index()
         {
