@@ -10,13 +10,13 @@
             <div id="redes">
                 <h4>Redes Sociales</h4>
                 <ul>
-                    <li><img src="../img/facebook.png" alt="Facebook" id="iconoRedes">Facebook</li>                    
-                    <li><img src="../img/instagram.png" alt="Instagram" id="iconoRedes">Instagram</li>
+                    <li><img src="../img/siteImages/facebook.png" alt="Facebook" id="iconoRedes">Facebook</li>                    
+                    <li><img src="../img/siteImages/instagram.png" alt="Instagram" id="iconoRedes">Instagram</li>
                 </ul>
             </div>
         </div>
         <div id="logoFooter">
-            <img class="logoFooter" src="../img/logoABlanco.png" alt="Logo">
+            <img class="logoFooter" src="../img/siteImages/logoABlanco.png" alt="Logo">
         </div>
         <p id="pFooter">© 2024 Amo el diseño. Todos los derechos reservados.</p>
         <p id="pFooter2">Diseñado por .....</p>

@@ -14,6 +14,7 @@ namespace AmoElDiseno.Models
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Supplier> Supplier { get; set; } = default!;
         public DbSet<OrderNumberTracker> OrderNumberTrackers { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

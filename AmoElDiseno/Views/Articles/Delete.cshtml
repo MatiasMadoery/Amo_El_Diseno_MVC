@@ -1,0 +1,32 @@
+﻿@model AmoElDiseno.Models.Article
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<link rel="stylesheet" href="/css/customers.css">
+
+<h1>ELIMINAR</h1>
+<hr />
+<div>    
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn-rojo" />
+    </form>
+    <a asp-action="Index" class="volver-link">Volver a la lista</a>
+</div>
