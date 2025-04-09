@@ -7,7 +7,7 @@
 /* ----- Página principal ----- */
 
 .banner {
-    background-image: url(../img/banner.jpg);
+    background-image: url(../img/siteImages/banner.jpg);
     background-size: cover;
     background-position: center;
     padding: 100px;
@@ -18,18 +18,19 @@
 .contenedor {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));       
-    padding: 100px 0px;
+    padding: 50px 0px;
+    gap: 25px;
 }
 
-     .contenedor article {
+     .contenedor article {         
         border: 3px solid black;
         border-radius: 5px;
-        padding: 10px; 
+        padding: 10px 0px; 
         margin-bottom: 25px; 
-    }
+    } 
 
         .contenedor article p {
-            padding: 10px;
+            padding: 10px 0;
             text-align: center;
         }
 
@@ -78,27 +79,29 @@
     }
 
 
+
 /* ----- Footer ----- */  
 
 footer {
-    background-image: url(../img/fondoTrama.png);
+    background-image: url(../img/siteImages/fondoTrama.png);
     background-size: cover;
-    padding: 10px 0; 
-    text-align: center;  
+    padding: 10px 0;    
 }
 
+
 .contacto-redes {
+    flex-direction: initial;
     display: flex;
-    justify-content: space-around; 
-    align-items: flex-start; 
-    flex-wrap: wrap;    
-    margin: 0 auto 20px auto; 
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 auto 20px auto;
     color: white;
-    padding: 0 20px; 
+    padding: 0 20px;
 }
 
     .contacto-redes > div { 
-        min-width: 250px;
+        min-width: auto;
         margin: 20px 130px; 
     }
 
@@ -249,7 +252,7 @@ footer {
     }
 
     .contacto-redes {
-        flex-direction: column;
+        flex-direction: initial;
     }
 
     #contacto, #redes {
@@ -280,14 +283,11 @@ footer {
     .seccionIcono {
         margin: 60px;
     }
+  
 }
 
 /* mediaQuery para grandes pantallas */
 @media (min-width: 1367px) {
-    .contenedor {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;        
-    }
 
     .iconosInfo {
         justify-content: space-between;
@@ -297,4 +297,23 @@ footer {
     .seccionIcono {
         margin: 80px;
     }
+
+    .contacto-redes {
+        flex-direction: initial;        
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 0 auto 20px auto;
+        color: white;
+        padding: 0 20px;
+    }
+
+    #contacto, #redes {
+        text-align:initial;
+        margin: 10px 0;
+    }
+
+        #redes ul {            
+            padding: 10px;            
+        }
 }

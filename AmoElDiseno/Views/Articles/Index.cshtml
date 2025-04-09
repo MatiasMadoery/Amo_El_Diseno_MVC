@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AmoElDiseno.Models.Article>
+
+@{
+    ViewData["Title"] = "Articulos";
+}
+
+<link rel="stylesheet" href="/css/customers.css">
+
+<h1>ARTICULOS</h1>
+
+<hr />
+<a asp-action="Create" class="btn btn-success">Crear Nuevo Artículo</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model)
+        {
+            <tr>
+                <td>@article.Name</td>
+                <td>@string.Format("{0:C}", article.Price)</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        <a asp-action="Details" asp-route-id="@article.Id" class="btn-azul">Detalles</a>
+                        <a asp-action="Edit" asp-route-id="@article.Id" class="btn-amarillo">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@article.Id" class="btn-rojo">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

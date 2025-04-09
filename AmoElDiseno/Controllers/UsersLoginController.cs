@@ -77,24 +77,41 @@ namespace AmoElDiseno.Controllers
             return View();
         }
 
-
         //Use for create accounts manually with the code
-        /*public IActionResult ManualCreateAdmin()
-        {
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword("admin123");
+        //public IActionResult ManualCreateAdmin()
+        //{
+        //    var hashedPassword = BCrypt.Net.BCrypt.HashPassword("Nicolas123");
 
-            var adminUser = new User
-            {
-                UserName = "admin",
-                Password = hashedPassword,
-                Role = "Admin"
-            };
+        //    var adminUser = new User
+        //    {
+        //        UserName = "Nicolas",
+        //        Password = hashedPassword,
+        //        Role = "Admin"
+        //    };
 
-            _context.Users!.Add(adminUser);
-            _context.SaveChanges();
+        //    _context.Users!.Add(adminUser);
+        //    _context.SaveChanges();
 
-            return Ok("Usuario admin creado manualmente.");
-        }*/
+        //    return Ok("Usuario admin creado manualmente.");
+        //}
+
+        //public IActionResult ManualCreateAdmin()
+        //{
+        //    var hashedPassword = BCrypt.Net.BCrypt.HashPassword("Paula123");
+
+        //    var adminUser = new User
+        //    {
+        //        UserName = "Paula",
+        //        Password = hashedPassword,
+        //        Role = "Admin"
+        //    };
+
+        //    _context.Users!.Add(adminUser);
+        //    _context.SaveChanges();
+
+        //    return Ok("Usuario admin creado manualmente.");
+        //}
+
 
     }
 }
